@@ -1,0 +1,74 @@
+<div class="container">
+    <h2>The page of the messages!</h2>
+    <p>Here you can send messages to other people and interact with them</p>
+
+    <!-- Button trigger modal login-->
+    <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#LoginModal">
+        Login
+    </button>
+
+    <!-- Modal Login-->
+  <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalTitle">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="w-75 mx-auto">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="eemail" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" aria-describedby="password">
+            </div>
+            <button class="btn btn-primary w-75 ms-5 mt-3">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Button trigger modal login-->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegisterModal">
+        Register
+    </button>
+  
+  <!-- Modal Register-->
+  <div class="modal fade" id="RegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalTitle">Register</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="w-75 mx-auto">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="eemail" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" aria-describedby="password">
+            </div>
+            <button class="btn btn-primary w-75 ms-5 mt-3">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
