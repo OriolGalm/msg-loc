@@ -1,9 +1,10 @@
-<div class="container">
+<div class="container mt-4">
     <h2>The page of the messages!</h2>
     <p>Here you can send messages to other people and interact with them</p>
 
     <!-- Button trigger modal login-->
-    <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#LoginModal">
+    <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#LoginModal"
+    *ngIf="!this.tokenSvc.isLogged()">
         Login
     </button>
 
@@ -16,7 +17,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="w-75 mx-auto" [formGroup]="this.loginForm" (submit)="loginUser(loginForm.value)">
+          <form class="w-75 mx-auto" [formGroup]="this.loginForm" (ngSubmit)="loginUser(loginForm.value)">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
@@ -25,7 +26,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" class="form-control" aria-describedby="password" formControlName="password">
             </div>
-            <button class="btn btn-primary w-75 ms-5 mt-3" type="submit">Login</button>
+            <button class="btn btn-primary w-75 ms-5 mt-3" data-bs-dismiss="modal" type="submit">Login</button>
           </form>
         </div>
       </div>
@@ -34,7 +35,8 @@
 
 
     <!-- Button trigger modal register-->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegisterModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+    *ngIf="!this.tokenSvc.isLogged()">
         Register
     </button>
   
@@ -47,7 +49,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="w-75 mx-auto" [formGroup]="this.signupForm" (submit)="newUser(signupForm.value)">
+          <form class="w-75 mx-auto" [formGroup]="this.signupForm" (ngSubmit)="newUser(signupForm.value)">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" aria-describedby="emailHelp" fomrControlName="name">

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/shared/models/user';
+import { Response } from 'src/app/shared/models/response';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { TokenService } from 'src/app/shared/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +16,11 @@ export class HomeComponent implements OnInit {
   public loginForm!: FormGroup;
   public signupForm!: FormGroup;
 
-  constructor(private readonly fb: FormBuilder) { }
+  constructor(private readonly fb: FormBuilder,
+    private readonly authSvc: AuthService,
+    public readonly tokenSvc: TokenService,
+    private readonly router: Router
+    ) { }
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -23,7 +32,6 @@ export class HomeComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
-    console.log("Login: ", this.loginForm);
   }
 
   private initSignupForm(): void{
@@ -32,15 +40,21 @@ export class HomeComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
-    console.log("Registre: ", this.signupForm);
   }
 
   public newUser(value: any){
     console.log("Usuari registrat: ", value);
   }
 
-  public loginUser(value: any){
-    console.log("Usuari loguejat: ", value);
+  public loginUser(value: User){
+    this.authSvc.loginUser(value).subscribe({
+      next: data => {
+        this.tokenSvc.setToken(data.data.token);
+        this.router.navigate(['user']);
+        console.log("Usuari loguejat: ", data);
+      }
+    })
+    //console.log("Usuari loguejat: ", value);
   }
 
 }

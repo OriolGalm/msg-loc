@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public readonly tokenSvc: TokenService,
+    private readonly router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  public logOut(): void{
+    this.tokenSvc.logOut();
+    this.router.navigate(['/']);
   }
 
 }

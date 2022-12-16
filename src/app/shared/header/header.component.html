@@ -6,9 +6,10 @@
       </button>
   
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" routerLink="/user">User</a>
+        <div class="navbar-nav" *ngIf="this.tokenSvc.isLogged()">
+          <a class="nav-link active me-3" aria-current="page" routerLink="/user">User</a>
         </div>
       </div>
+      <a class="nav-link active logout" id="logout" aria-current="page" (click)="logOut()">Logout</a>
     </div>
 </nav>
