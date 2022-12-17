@@ -1,0 +1,18 @@
+.error-message{
+    position: fixed;
+    top:1vh;
+    left: 40vw;
+    width: 200px;
+    height: auto;
+    padding: 0px 5px ;
+    border: 1px solid silver;
+    border-radius: 3px;
+    color: red;
+    background: white;
+    text-align: center;
+    z-index: 1056;
+}
+.icon-eye{
+    z-index: 1058;
+    margin-left: -30px;
+}

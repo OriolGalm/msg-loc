@@ -8,6 +8,24 @@
         Login
     </button>
 
+    <!-- Button trigger modal register-->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+    *ngIf="!this.tokenSvc.isLogged()">
+        Register
+    </button>
+
+    <div class="error-message h-5" *ngIf="errorShow == true">
+      <div *ngFor="let error of errorArray | keyvalue">
+        {{ error.value }}
+      </div>
+    </div>
+    <div class="error-message h-5" *ngIf="errorShow == true">
+      <div *ngFor="let error of errorArray[0] | keyvalue">
+        {{ error.value }}
+      </div>
+    </div>
+</div>
+
     <!-- Modal Login-->
   <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -25,8 +43,9 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" class="form-control" aria-describedby="password" formControlName="password">
+                <i class="fa-regular fa-eye-slash icon-eye"></i>
             </div>
-            <button class="btn btn-primary w-75 ms-5 mt-3" data-bs-dismiss="modal" type="submit">Login</button>
+            <button class="btn btn-primary w-75 ms-5 mt-3" type="submit">Login</button>
           </form>
         </div>
       </div>
@@ -34,11 +53,7 @@
   </div>
 
 
-    <!-- Button trigger modal register-->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegisterModal"
-    *ngIf="!this.tokenSvc.isLogged()">
-        Register
-    </button>
+    
   
   <!-- Modal Register-->
   <div class="modal fade" id="RegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -68,5 +83,8 @@
       </div>
     </div>
   </div>
-</div>
+
   
+
+
+

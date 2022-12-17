@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user';
-import { Response } from 'src/app/shared/models/response';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { Router } from '@angular/router';
@@ -15,6 +14,11 @@ export class HomeComponent implements OnInit {
 
   public loginForm!: FormGroup;
   public signupForm!: FormGroup;
+  public errorMessage!: string;
+  public errorEmail!: string;
+  public errorPassword!: string;
+  public errorArray: string[] = [];
+  public errorShow: boolean = false;
 
   constructor(private readonly fb: FormBuilder,
     private readonly authSvc: AuthService,
@@ -49,12 +53,25 @@ export class HomeComponent implements OnInit {
   public loginUser(value: User){
     this.authSvc.loginUser(value).subscribe({
       next: data => {
-        this.tokenSvc.setToken(data.data.token);
-        this.router.navigate(['user']);
-        console.log("Usuari loguejat: ", data);
-      }
+        if(data.error == true){
+          this.errorArray = [];
+          this.errorArray.push(data.messages);
+          JSON.stringify(this.errorArray);
+          setTimeout(() => {
+            this.errorShow = false;
+          }, 12000);
+          setTimeout(() => {
+            this.errorShow = true;
+          }, 500);
+          console.log("Error: ", JSON.stringify(this.errorArray));
+        }else{
+          this.tokenSvc.setToken(data.data.token);
+          this.router.navigate(['user']);
+          this.errorShow = false;
+          console.log("Usuari loguejat: ", data.data.token);
+      }}
     })
-    //console.log("Usuari loguejat: ", value);
+
   }
 
 }

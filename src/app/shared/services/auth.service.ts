@@ -13,6 +13,6 @@ export class AuthService {
   constructor(private readonly http: HttpClient) { }
 
   public loginUser(user: User): Observable<any>{
-    return this.http.post<User>(environment.LOGIN_URL, user, {observe: 'body'})
+    return this.http.post<User>(environment.LOGIN_URL, user)
   }
 }
