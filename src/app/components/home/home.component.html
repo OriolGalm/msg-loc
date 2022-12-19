@@ -14,12 +14,12 @@
         Register
     </button>
 
-    <div class="error-message h-5" *ngIf="errorShow == true">
+    <div class="animate__animated animate__fadeIn error-message h-5" *ngIf="errorShow == true">
       <div *ngFor="let error of errorArray | keyvalue">
         {{ error.value }}
       </div>
     </div>
-    <div class="error-message h-5" *ngIf="errorShow == true">
+    <div class="animate__animated animate__fadeIn error-message h-5" *ngIf="errorShow == true">
       <div *ngFor="let error of errorArray[0] | keyvalue">
         {{ error.value }}
       </div>
@@ -40,14 +40,17 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
             </div>
-            <div class="mb-3">
+            <div class="pass mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control" aria-describedby="password" formControlName="password">
-                <i class="fa-regular fa-eye-slash icon-eye"></i>
+                <input [type]="hide ? 'password' : 'text'" id="password" class="form-control" aria-describedby="password" formControlName="password">
+                <div id="div-eye" (click)="hide = !hide"  [attr.aria-pressed]="hide">
+                  <i class="{{hide ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'}} icon-eye"></i>
+                </div>
             </div>
             <button class="btn btn-primary w-75 ms-5 mt-3" type="submit">Login</button>
           </form>
         </div>
+        <h4 data-bs-toggle="modal" data-bs-target="#RegisterModal">Create an account</h4>
       </div>
     </div>
   </div>
@@ -73,13 +76,17 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="eemail" aria-describedby="emailHelp" formControlName="email">
             </div>
-            <div class="mb-3">
+            <div class="pass mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control" aria-describedby="password" formControlName="password">
+                <input [type]="hide ? 'password' : 'text'" id="password" id="password" class="form-control" aria-describedby="password" formControlName="password">
+                <div id="div-eye" (click)="hide = !hide"  [attr.aria-pressed]="hide">
+                  <i class="{{hide ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'}} icon-eye"></i>
+                </div>
             </div>
             <button class="btn btn-primary w-75 ms-5 mt-3" type="submit">Register</button>
           </form>
         </div>
+        <div class="go-to-login">Already have an account?&nbsp;<span data-bs-toggle="modal" data-bs-target="#LoginModal">Login</span></div>
       </div>
     </div>
   </div>

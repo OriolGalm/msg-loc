@@ -14,11 +14,9 @@ export class HomeComponent implements OnInit {
 
   public loginForm!: FormGroup;
   public signupForm!: FormGroup;
-  public errorMessage!: string;
-  public errorEmail!: string;
-  public errorPassword!: string;
   public errorArray: string[] = [];
   public errorShow: boolean = false;
+  public hide: boolean = true;
 
   constructor(private readonly fb: FormBuilder,
     private readonly authSvc: AuthService,
@@ -51,27 +49,34 @@ export class HomeComponent implements OnInit {
   }
 
   public loginUser(value: User){
-    this.authSvc.loginUser(value).subscribe({
-      next: data => {
-        if(data.error == true){
-          this.errorArray = [];
-          this.errorArray.push(data.messages);
-          JSON.stringify(this.errorArray);
-          setTimeout(() => {
-            this.errorShow = false;
-          }, 12000);
-          setTimeout(() => {
+    if(this.loginForm.valid){
+      this.authSvc.loginUser(value).subscribe({
+        next: data => {
+          if(data.error == true){
+            this.errorArray = [];
+            this.errorArray.push(data.messages);
+            JSON.stringify(this.errorArray);
             this.errorShow = true;
-          }, 500);
-          console.log("Error: ", JSON.stringify(this.errorArray));
-        }else{
-          this.tokenSvc.setToken(data.data.token);
-          this.router.navigate(['user']);
+            setTimeout(() => {
+              this.errorShow = false;
+            }, 10000);
+            console.log("Error: ", JSON.stringify(this.errorArray));
+          }else{
+            this.tokenSvc.setToken(data.data.token);
+            this.router.navigate(['user']);
+            this.errorShow = false;
+            console.log("Usuari loguejat: ", data.data.token);
+        }}
+      })
+    }else{
+      const errorFront = "Fill in the blanks";
+      this.errorArray = [];
+      this.errorArray.push(errorFront);
+      this.errorShow = true;
+        setTimeout(() => {
           this.errorShow = false;
-          console.log("Usuari loguejat: ", data.data.token);
-      }}
-    })
-
+        }, 10000);
+    }
   }
 
 }

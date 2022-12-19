@@ -1,18 +1,58 @@
 .error-message{
     position: fixed;
-    top:1vh;
-    left: 40vw;
+    top:0vh;
+    left: 44vw;
     width: 200px;
     height: auto;
-    padding: 0px 5px ;
-    border: 1px solid silver;
-    border-radius: 3px;
-    color: red;
-    background: white;
+    padding: 6px 10px ;
+    font-weight: 600;
+    border-radius: 4px;
+    color: white;
+    background: red;
     text-align: center;
     z-index: 1056;
+    @media(max-width: 900px){
+        left: 36vw;
+    }
+    @media(max-width: 500px){
+        left: 30vw;
+        width: 180px;
+    }
 }
-.icon-eye{
+.pass{
+    position: relative;
+}
+#div-eye{
+    position: absolute;
+    top:39px;
+    right:8px;
     z-index: 1058;
-    margin-left: -30px;
+}
+.modal{
+    h1{
+        margin: 0px auto;
+    }
+    h4{
+        font-size: 1rem;
+        padding: 5px;
+        margin: 0px auto 10px;
+        cursor: pointer;
+    }
+    h4:hover{
+        text-decoration: underline;
+    }
+    .go-to-login{
+        font-size: 1rem;
+        padding: 5px;
+        margin: 0px auto 10px;
+        span{
+            cursor: pointer;
+        }
+        span:hover{
+            text-decoration: underline;
+        }
+    }
+}
+.modal-header .btn-close{
+    margin: 0px;
 }
