@@ -24,6 +24,9 @@
         {{ error.value }}
       </div>
     </div>
+    <div class="animate__animated animate__fadeIn success-message h-5" *ngIf="successShow == true">
+        {{ successMessage }}
+    </div>
 </div>
 
     <!-- Modal Login-->
@@ -64,17 +67,23 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="ModalTitle">Register</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #modalHide></button>
         </div>
         <div class="modal-body">
           <form class="w-75 mx-auto" [formGroup]="this.signupForm" (ngSubmit)="newUser(signupForm.value)">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" fomrControlName="name">
+                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name">
+                <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.errors?.['required']"
+                  class="error">Required</div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="eemail" aria-describedby="emailHelp" formControlName="email">
+                <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.errors?.['email']" class="error">Invalid
+                  email</div>
+                <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.errors?.['required']" class="error">
+                  Required</div>
             </div>
             <div class="pass mb-3">
                 <label for="password" class="form-label">Password</label>
@@ -82,6 +91,10 @@
                 <div id="div-eye" (click)="hide = !hide"  [attr.aria-pressed]="hide">
                   <i class="{{hide ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'}} icon-eye"></i>
                 </div>
+                <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.errors?.['minlength']"
+                  class="error">Password must have min 6 characters</div>
+                <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.errors?.['required']"
+                  class="error">Required</div>
             </div>
             <button class="btn btn-primary w-75 ms-5 mt-3" type="submit">Register</button>
           </form>

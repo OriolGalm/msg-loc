@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -12,10 +12,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  @ViewChild('modalHide') public modalHide!:ElementRef;
+
   public loginForm!: FormGroup;
   public signupForm!: FormGroup;
   public errorArray: string[] = [];
+  public successMessage: string = "You've been registered";
   public errorShow: boolean = false;
+  public successShow: boolean = false;
   public hide: boolean = true;
 
   constructor(private readonly fb: FormBuilder,
@@ -44,10 +48,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  public newUser(value: any){
-    console.log("Usuari registrat: ", value);
-  }
-
   public loginUser(value: User){
     if(this.loginForm.valid){
       this.authSvc.loginUser(value).subscribe({
@@ -60,13 +60,46 @@ export class HomeComponent implements OnInit {
             setTimeout(() => {
               this.errorShow = false;
             }, 10000);
-            console.log("Error: ", JSON.stringify(this.errorArray));
+            console.log("Error: ", JSON.stringify(data.error));
           }else{
             this.tokenSvc.setToken(data.data.token);
             this.router.navigate(['user']);
             this.errorShow = false;
-            console.log("Usuari loguejat: ", data.data.token);
+            console.log("Usuari loguejat: ", data.error);
         }}
+      })
+    }else{
+      const errorFront = "Fill in the blanks";
+      this.errorArray = [];
+      this.errorArray.push(errorFront);
+      this.errorShow = true;
+        setTimeout(() => {
+          this.errorShow = false;
+        }, 10000);
+    }
+  }
+
+  public newUser(value: User){
+    if(this.signupForm.valid){
+      this.authSvc.signupUser(value).subscribe({
+        next: data => {
+          if(data.error == true){
+            this.errorArray = [];
+            this.errorArray.push(data.message);
+            JSON.stringify(this.errorArray);
+            this.errorShow = true;
+            setTimeout(() => {
+              this.errorShow = false;
+            }, 10000);
+          }else{
+            this.successMessage;
+            this.successShow = true;
+            setTimeout(() => {
+              this.successShow = false;
+            }, 10000);
+            this.modalHide.nativeElement.click();
+          }
+        }
       })
     }else{
       const errorFront = "Fill in the blanks";

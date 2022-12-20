@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
-import { Response } from '../models/response';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
@@ -14,5 +13,9 @@ export class AuthService {
 
   public loginUser(user: User): Observable<any>{
     return this.http.post<User>(environment.LOGIN_URL, user)
+  }
+
+  public signupUser(user: User): Observable<any>{
+    return this.http.post<User>(environment.REGISTER_URL, user)
   }
 }

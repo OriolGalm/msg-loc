@@ -24,6 +24,14 @@ export class TokenService {
     return false;
   }
 
+  public getId(): number | null{
+    if(!this.isLogged()){
+      return null;
+    }
+    const userId: number = this.getPayload().data.id;
+    return userId; 
+  }  
+
   public getName(): string | null{
     if(!this.isLogged()){
       return null;

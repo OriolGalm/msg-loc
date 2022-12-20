@@ -1,14 +1,13 @@
-.error-message{
+.error-message, .success-message{
     position: fixed;
     top:0vh;
-    left: 44vw;
-    width: 200px;
+    left: 43vw;
+    width: 220px;
     height: auto;
     padding: 6px 10px ;
     font-weight: 600;
     border-radius: 4px;
     color: white;
-    background: red;
     text-align: center;
     z-index: 1056;
     @media(max-width: 900px){
@@ -18,6 +17,16 @@
         left: 30vw;
         width: 180px;
     }
+}
+.error-message{
+    background: red;
+}
+.success-message{
+    background: green;
+}
+.error {
+    color: red;
+    font-size: .9rem;
 }
 .pass{
     position: relative;

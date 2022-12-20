@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  LOGIN_URL: 'http://localhost:8080/api/login'
+  LOGIN_URL: 'http://localhost:8080/api/login',
+  REGISTER_URL: 'http://localhost:8080/api/register',
+  UPDATE_USER: 'http://localhost:8080/api/update/',
+  SHOW_USER: 'http://localhost:8080/api/show/',
 };
 
 /*
