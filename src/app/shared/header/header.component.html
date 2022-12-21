@@ -8,8 +8,9 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav" *ngIf="this.tokenSvc.isLogged()">
           <a class="nav-link active me-3" aria-current="page" routerLink="/user">User</a>
+          <a class="nav-link active logout" id="logout" aria-current="page" *ngIf="this.tokenSvc.isLogged()" (click)="logOut()">Logout</a>
+
         </div>
       </div>
-      <a class="nav-link active logout" id="logout" aria-current="page" *ngIf="this.tokenSvc.isLogged()" (click)="logOut()">Logout</a>
     </div>
 </nav>

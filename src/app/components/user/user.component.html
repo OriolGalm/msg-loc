@@ -1,6 +1,28 @@
 <div class="container mt-4">
-    <h3>Hello {{ this.tokenSvc.getName() }}</h3>
-    <p>{{ userData?.message }}</p>
-    <p>Write some text:</p>
+    <div id="avatar-box"  data-toggle="tooltip" title="Add an image" data-animation="true">
+        <img src="./../../assets/img/clouds.jpg" id="avatar">
+    </div>
+    <div *ngIf="hideForm == true">
+        <div class="row">
+            <h3 class="col-1">{{ userData?.name }}</h3>
+            <button class="col-1 btn btn-secondary btn-sm boto" (click)="showForm()">
+                <i class="fa-solid fa-pen edit-icon"></i>
+            </button>
+        </div>
+        <div class="row">
+            <p class="col-1 message">{{ userData?.message }}</p>
+            <button class="col-1 btn btn-secondary btn-sm boto" (click)="showForm()">
+                <i class="fa-solid fa-pen edit-icon"></i>
+            </button>
+        </div>
+    </div>
+
+    <form *ngIf="hideForm == false" [formGroup]="updateForm" (ngSubmit)="onUpdate(updateForm.value)">
+        <input type="text" class="form-control w-25 my-2" [value]="userData?.name" formControlName="name">
+        <input type="text" class="form-control w-25" [value]="userData?.message" formControlName="message">
+        <button class="btn btn-outline-primary my-3 me-2 mx-auto" type="submit">Edit</button>
+        <button class="btn btn-outline-secondary my-3 mx-auto" (click)="showForm()">Close</button>
+    </form>
     
+    <p>Write some text:</p>
 </div>

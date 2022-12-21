@@ -1,0 +1,27 @@
+#avatar-box{
+    width: 140px;
+    height: 140px;
+    border: 1px solid grey;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 20px 0px;
+    cursor: pointer;
+    #avatar{
+        width: 100%;
+        height: 100%;
+    }
+}
+h3{
+    width: auto;
+}
+.message{
+    text-align: start;
+    width: auto;
+}
+.boto{
+    width: 32px;
+    height: 32px;
+}
+.boto:hover{
+    color: rgb(255, 71, 169)
+}
