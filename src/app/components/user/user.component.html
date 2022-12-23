@@ -1,7 +1,11 @@
 <div class="container mt-4">
-    <div id="avatar-box"  data-toggle="tooltip" title="Add an image" data-animation="true">
-        <img src="./../../assets/img/clouds.jpg" id="avatar">
+    
+    <div id="avatar_box"  data-toggle="tooltip" title="Add an image" data-animation="true">
+        <input type="file" class="file-input" name="img"  id="customFile" (change)="handleImage($event)">
+        <label class="file-label" for="customFile"><img src="./../../assets/img/clouds.jpg" id="avatar">
+        </label>
     </div>
+
     <div *ngIf="hideForm == true">
         <div class="row">
             <h3 class="col-1">{{ userData?.name }}</h3>

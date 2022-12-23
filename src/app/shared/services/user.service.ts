@@ -12,10 +12,17 @@ export class UserService {
   constructor(private readonly http: HttpClient) { }
 
   public updateUser(userId: number, user: User): Observable<any>{
-    return this.http.put(environment.UPDATE_USER + userId, user);
+    return this.http.put<any>(environment.UPDATE_USER + userId, user);
   }
 
   public oneUser(userId: number): Observable<any> {
-    return this.http.get(environment.SHOW_USER + userId);
+    return this.http.get<User>(environment.SHOW_USER + userId);
+  }
+
+  public updateImage(userId: number, img: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('multipartFile', img);
+    console.log("FormData: ", formData);
+    return this.http.post(environment.CHANGE_IMG + userId, formData, {responseType: 'blob'});
   }
 }

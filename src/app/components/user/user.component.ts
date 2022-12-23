@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
   public hideForm: boolean = true;
   //public updateForm!: FormGroup;
   private userId!: any;
+  public image!: File;
 
   constructor(public readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
@@ -61,4 +62,23 @@ export class UserComponent implements OnInit {
       (res: User) => console.log("User: ", res)
     )
   } */
+
+  public handleImage(event: any){
+    this.image = event.target.files[0];
+    const reader: FileReader = new FileReader();
+    /* reader.onload = (e:any) => {
+      console.log("Image: ", e);
+    } */
+    reader.readAsDataURL(this.image);
+    this.addImg(this.image);
+  }
+
+  private addImg(image: File){
+    console.log("HandleImage: ", image)
+    this.userSvc.updateImage(this.userId, image).subscribe(
+      data => {
+        console.log("Imatge: ", data)
+      }
+    )
+  }
 }
