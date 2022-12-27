@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
             this.tokenSvc.setToken(data.data.token);
             this.router.navigate(['user']);
             this.errorShow = false;
-            console.log("Usuari loguejat: ", data.error);
+            //console.log("Usuari loguejat: ", data.error);
         }}
       })
     }else{
