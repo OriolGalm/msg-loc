@@ -6,11 +6,6 @@
         <label class="file-label" for="customFile">
             <img [src]="miniatura" id="avatar">
         </label>
-       <!--  <ng-template #default>
-            <label class="file-label" for="customFile">
-                <img [src]="miniatura">
-            </label>
-        </ng-template> -->
     </div>
 
     <div *ngIf="hideForm == true">
@@ -32,7 +27,6 @@
         <input type="text" class="form-control w-25 my-2" [(ngModel)]="userData.name" name="name">
         <input type="text" class="form-control w-25" [(ngModel)]="userData.message" name="message">
         <button class="btn btn-outline-primary my-3 me-2 mx-auto" type="submit">Edit</button>
-        <!-- <button class="btn btn-outline-secondary my-3 mx-auto" (click)="changeForm()">Close</button> -->
     </form>
     
     <p>Write some text:</p>

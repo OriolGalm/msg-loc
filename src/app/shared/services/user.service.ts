@@ -21,10 +21,7 @@ export class UserService {
 
   public updateImage(userId: number, img: File): Observable<any> {
     const formData = new FormData();
-    formData.append('File', img, img.name);
-    return this.http.post(environment.CHANGE_IMG + userId, formData, {
-      observe: 'response',
-      responseType: 'blob'
-    });
+    formData.append('image', img);
+    return this.http.post<File>(environment.CHANGE_IMG + userId, formData);
   }
 }
