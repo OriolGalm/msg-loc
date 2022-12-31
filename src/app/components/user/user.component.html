@@ -8,6 +8,12 @@
         </label>
     </div>
 
+    <div class="animate__animated animate__fadeIn error_message h-5" *ngIf="errorShow == true">
+        <div>{{ errorImg }}</div>
+    </div>
+
+    <img [src]="sendImg">
+
     <div *ngIf="hideForm == true">
         <div class="row">
             <h3 class="col-1">{{ userData?.name }}</h3>
@@ -17,9 +23,9 @@
         </div>
         <div class="row">
             <p class="col-1 message">{{ userData?.message }}</p>
-            <button class="col-1 btn btn-secondary btn-sm boto" (click)="changeForm()">
+            <!-- <button class="col-1 btn btn-secondary btn-sm boto" (click)="changeForm()">
                 <i class="fa-solid fa-pen edit-icon"></i>
-            </button>
+            </button> -->
         </div>
     </div>
 

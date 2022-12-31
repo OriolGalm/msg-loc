@@ -15,7 +15,10 @@ export class UserComponent implements OnInit {
   public hideForm: boolean = true;
   private userId!: any;
   public image!: File;
+  public sendImg!: File;
   public miniatura: any = "./../../assets/img/clouds.jpg";
+  public errorShow: boolean = false;
+  public errorImg: string = "Image must have less than 1Mb";
 
   constructor(public readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
@@ -25,6 +28,7 @@ export class UserComponent implements OnInit {
     this.userId = this.tokenSvc.getId();
     this.showUser(this.userId);
     this.initForm();
+    this.showImg();
   }
 
   private initForm(): void {
@@ -51,6 +55,13 @@ export class UserComponent implements OnInit {
     });
   }
 
+  public showImg(){
+    this.userSvc.getImage(this.userId).subscribe(
+      res => {this.sendImg = res;
+      console.log("Ruta imatge: ", this.sendImg)}
+    )
+  }
+
   public changeForm(): void {
     this.hideForm = !this.hideForm;
     this.updateForm.setValue({
@@ -61,14 +72,19 @@ export class UserComponent implements OnInit {
 
   public handleImage(event: any){
     this.image = <File>event.target.files[0];
-   
-    const reader: FileReader = new FileReader();
-    reader.onload = (e:any) => {
-      this.miniatura = e.target.result;
+    if(this.image.size <= 1024000){
+      const reader: FileReader = new FileReader();
+      reader.onload = (e:any) => {
+        this.miniatura = e.target.result;
+      }
+      reader.readAsDataURL(this.image);
+      this.addImg(this.image);
+    }else{
+      this.errorShow = true;
+      setTimeout(() => {
+        this.errorShow = false;
+      }, 8000);
     }
-    reader.readAsDataURL(this.image);
-    
-    this.addImg(this.image);
   }
 
   private addImg(image: File){

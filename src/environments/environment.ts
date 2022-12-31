@@ -8,7 +8,8 @@ export const environment = {
   REGISTER_URL: 'http://localhost:8080/api/register',
   UPDATE_USER: 'http://localhost:8080/api/update/',
   SHOW_USER: 'http://localhost:8080/api/show/',
-  CHANGE_IMG: 'http://localhost:8080/api/image/'
+  CHANGE_IMG: 'http://localhost:8080/api/image/',
+  GET_IMG: 'http://localhost:8080/api/getimage/'
 };
 
 /*
