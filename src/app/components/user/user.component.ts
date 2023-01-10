@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
     this.userSvc.oneUser(id).subscribe(
       res => {this.userData = res.data;
         if(this.userData.image != null){
-          this.sendImg = `http://localhost:8080/assets/upload/${this.userData.image}`;
+          this.sendImg = `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/${this.userData.image}`;
         }else{
           this.sendImg = this.miniatura;
         }
@@ -88,6 +88,9 @@ export class UserComponent implements OnInit {
     this.userSvc.updateImage(this.userId, image).subscribe(
       data => {data;
       this.showUser(this.userId)}
+    )
+    this.userSvc.uploadImage(image).subscribe(
+      res => res
     )
   }
 }

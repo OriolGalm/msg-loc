@@ -24,4 +24,12 @@ export class UserService {
     formData.append('image', img);
     return this.http.post<File>(environment.CHANGE_IMG + userId, formData);
   }
+
+  public uploadImage(img: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', img);
+    formData.append('upload_preset', 'image_cloud');
+    formData.append('cloud_name', 'dfwiywprm')
+    return this.http.post<File>(environment.CLOUD_IMG, formData);
+  }
 }
