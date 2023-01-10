@@ -24,8 +24,4 @@ export class UserService {
     formData.append('image', img);
     return this.http.post<File>(environment.CHANGE_IMG + userId, formData);
   }
-
-  public getImage(userId: number): Observable<File> {
-    return this.http.get<File>(environment.GET_IMG + userId);
-  }
 }

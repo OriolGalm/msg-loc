@@ -15,10 +15,10 @@ export class UserComponent implements OnInit {
   public hideForm: boolean = true;
   private userId!: any;
   public image!: File;
-  public sendImg!: File;
+  public sendImg!: string;
   public miniatura: any = "./../../assets/img/clouds.jpg";
   public errorShow: boolean = false;
-  public errorImg: string = "Image must have less than 1Mb";
+  public errorImg: string = "This image cannot be larger than 1Mb";
 
   constructor(public readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
@@ -28,7 +28,6 @@ export class UserComponent implements OnInit {
     this.userId = this.tokenSvc.getId();
     this.showUser(this.userId);
     this.initForm();
-    this.showImg();
   }
 
   private initForm(): void {
@@ -52,14 +51,12 @@ export class UserComponent implements OnInit {
   public showUser(id: number){
     this.userSvc.oneUser(id).subscribe(
       res => {this.userData = res.data;
+        if(this.userData.image != null){
+          this.sendImg = `http://localhost:8080/assets/upload/${this.userData.image}`;
+        }else{
+          this.sendImg = this.miniatura;
+        }
     });
-  }
-
-  public showImg(){
-    this.userSvc.getImage(this.userId).subscribe(
-      res => {this.sendImg = res;
-      console.log("Ruta imatge: ", this.sendImg)}
-    )
   }
 
   public changeForm(): void {
@@ -89,9 +86,8 @@ export class UserComponent implements OnInit {
 
   private addImg(image: File){
     this.userSvc.updateImage(this.userId, image).subscribe(
-      data => {
-        console.log("Imatge: ", data)
-      }
+      data => {data;
+      this.showUser(this.userId)}
     )
   }
 }
