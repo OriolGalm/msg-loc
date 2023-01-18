@@ -45,7 +45,7 @@
             </div>
             <div class="pass mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input [type]="hide ? 'password' : 'text'" id="password" class="form-control" aria-describedby="password" formControlName="password">
+                <input [type]="hide ? 'password' : 'text'" id="login_password" class="form-control" aria-describedby="password" formControlName="password">
                 <div id="div-eye" (click)="hide = !hide"  [attr.aria-pressed]="hide">
                   <i class="{{hide ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'}} icon-eye"></i>
                 </div>

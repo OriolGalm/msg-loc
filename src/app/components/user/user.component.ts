@@ -38,6 +38,7 @@ export class UserComponent implements OnInit {
   }
 
   public async onUpdate(value: any){
+    //const token: any = this.tokenSvc.getToken();
     if(this.updateForm.value.name != value.name || this.updateForm.value.message != value.message){
       this.userSvc.updateUser(this.userId, value).subscribe(
         res => console.log("Update: ", res)

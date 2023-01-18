@@ -19,12 +19,16 @@
         height: 100%;
     }
 }
-h3{
+h4{
     width: auto;
 }
 .message{
     text-align: start;
     width: auto;
+}
+.placeh:empty:not(:focus)::before {
+    content: attr(data-placeholder);
+    color:silver;
 }
 .boto{
     width: 24px;

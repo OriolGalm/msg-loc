@@ -14,13 +14,13 @@
 
     <div *ngIf="hideForm == true">
         <div class="row">
-            <h3 class="col-1">{{ userData?.name }}</h3>
+            <h4 class="col-1 placeh" data-placeholder="Your name">{{ userData?.name }}</h4>
             <button class="col-1 btn btn-secondary btn-sm boto" (click)="changeForm()">
                 <i class="fa-solid fa-pen edit-icon"></i>
             </button>
         </div>
         <div class="row">
-            <p class="col-1 message">{{ userData?.message }}</p>
+            <p class="col-1 message placeh" data-placeholder="Your description">{{ userData?.message }}</p>
             <!-- <button class="col-1 btn btn-secondary btn-sm boto" (click)="changeForm()">
                 <i class="fa-solid fa-pen edit-icon"></i>
             </button> -->
