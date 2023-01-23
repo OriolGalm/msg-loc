@@ -9,7 +9,9 @@ export const environment = {
   UPDATE_USER: 'http://localhost:8080/api/update/',
   SHOW_USER: 'http://localhost:8080/api/show/',
   CHANGE_IMG: 'http://localhost:8080/api/image/',
-  CLOUD_IMG: 'https://api.cloudinary.com/v1_1/dfwiywprm/image/upload/'
+  CLOUD_IMG: 'https://api.cloudinary.com/v1_1/dfwiywprm/image/upload/',
+  CREATE_MSG: 'http://localhost:8080/api/text/',
+  GET_MSG: 'http://localhost:8080/api/gettext/'
 };
 
 /*
