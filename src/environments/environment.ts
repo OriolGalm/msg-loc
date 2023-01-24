@@ -8,9 +8,11 @@ export const environment = {
   REGISTER_URL: 'http://localhost:8080/api/register',
   UPDATE_USER: 'http://localhost:8080/api/update/',
   SHOW_USER: 'http://localhost:8080/api/show/',
+  ALL_USERS: 'http://localhost:8080/api/showall/',
   CHANGE_IMG: 'http://localhost:8080/api/image/',
   CLOUD_IMG: 'https://api.cloudinary.com/v1_1/dfwiywprm/image/upload/',
   CREATE_MSG: 'http://localhost:8080/api/text/',
+  GET_ID: 'http://localhost:8080/api/getid/',
   GET_MSG: 'http://localhost:8080/api/gettext/'
 };
 

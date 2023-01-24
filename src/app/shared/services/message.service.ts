@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from './../../environments/environment';
-import { Message } from './models/message';
+import { environment } from 'src/environments/environment';
+import { Message } from './../models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +17,9 @@ export class MessageService {
 
   public getMessage(user_id: number, request_id: number): Observable<any> {
     return this.http.get<Message>(environment.GET_MSG + user_id + '/' + request_id)
+  }
+
+  public getIdUsers(user_id: number): Observable<any> {
+    return this.http.get<number>(environment.GET_ID + user_id);
   }
 }

@@ -19,6 +19,10 @@ export class UserService {
     return this.http.get<User>(environment.SHOW_USER + userId);
   }
 
+  public allUsers(): Observable<any> {
+    return this.http.get<User>(environment.ALL_USERS);
+  }
+
   public updateImage(userId: number, img: File): Observable<any> {
     const formData = new FormData();
     formData.append('image', img);
