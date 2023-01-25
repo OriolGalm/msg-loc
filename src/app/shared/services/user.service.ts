@@ -11,25 +11,29 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) { }
 
-  public updateUser(userId: number, user: User): Observable<any>{
-    return this.http.put<any>(environment.UPDATE_USER + userId, user);
+  public updateUser(userId: number, user: User): Observable<void>{
+    return this.http.put<void>(environment.UPDATE_USER + userId, user);
   }
 
   public oneUser(userId: number): Observable<any> {
     return this.http.get<User>(environment.SHOW_USER + userId);
   }
 
-  public allUsers(): Observable<any> {
+  public oneUserName(userId: number, userNameId: number): Observable<User> {
+    return this.http.get<User>(environment.USER_NAME + userId + '/' + userNameId);
+  }
+
+  public allUsers(): Observable<User> {
     return this.http.get<User>(environment.ALL_USERS);
   }
 
-  public updateImage(userId: number, img: File): Observable<any> {
+  public updateImage(userId: number, img: File): Observable<File> {
     const formData = new FormData();
     formData.append('image', img);
     return this.http.post<File>(environment.CHANGE_IMG + userId, formData);
   }
 
-  public uploadImage(img: File): Observable<any> {
+  public uploadImage(img: File): Observable<File> {
     const formData = new FormData();
     formData.append('file', img);
     formData.append('upload_preset', 'image_cloud');

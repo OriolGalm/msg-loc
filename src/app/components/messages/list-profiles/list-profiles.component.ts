@@ -3,7 +3,6 @@ import { MessageService } from 'src/app/shared/services/message.service';
 import { Message } from 'src/app/shared/models/message';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-list-profiles',
@@ -16,10 +15,10 @@ export class ListProfilesComponent implements OnInit {
   public allMsgUsersId!: number;
   public resIds: number[] = [];
   public resIdsUniques: number[] = [];
-  public userRequestId: any = 19;
+  //public userRequest: any = [];
   public message!: [Message];
   public users!: any;
-  public dataUser!: User;
+  public dataUser: any = [];
 
   constructor(private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
@@ -27,23 +26,24 @@ export class ListProfilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
-    this.messageUsers(this.userId, this.userRequestId);
     this.getIds(this.userId);
-    //this.usersName();
   }
 
-  public messageUsers(id: number, idRequest: number){
+  public messageUsers(id: number, idRequest: number): void{
     this.msgSvc.getMessage(id, idRequest).subscribe(
       res => {
         this.message = res.data;
         console.log("Message: ", this.message);
-        this.message.map(res => { 
-          res.id_send;
-          
-          //console.log("Ids: ", res);
-        })
+        /* this.message.map((res: any) => { 
+          this.userRequest.push(res);
+          console.log("MsgIds: ", this.userRequest);
+        }) */
       }
     )
+  }
+
+  public msgFromUser(idFromUser: number): void{
+    this.messageUsers(this.userId, idFromUser);
   }
 
   private getIds(id: number): void{
@@ -57,44 +57,21 @@ export class ListProfilesComponent implements OnInit {
           //console.log("User_id: ", this.resIdsUniques);
         })
         this.usersName();
-        /* const msgId = num.data;
-        console.log("Ids: ", msgId);
-        msgId.map(
-          (res: any) => {
-            const resIdSend = res.id_send;
-            if(resIdSend != this.userId){
-              this.resIds.push(resIdSend);
-              this.resIdsUniques = [...new Set(this.resIds)];
-              console.log("Id_send: ", this.resIdsUniques)
-            }
-            const resIdRec = res.id_receive;
-            if(resIdRec != this.userId){
-              this.resIds.push(resIdRec);
-              this.resIdsUniques = [...new Set(this.resIds)];
-              console.log("ID_receive: ", this.resIdsUniques);
-            }
-          }
-        ) */
       }
     )
     
   }
 
-  private usersName(){
+  private usersName(): void{
     for(let i = 0; i < this.resIdsUniques.length; i++){
-      this.userSvc.oneUser(this.resIdsUniques[i]).subscribe(
-        res => {
-          this.dataUser = res.data;
-          console.log("Users: ", this.dataUser);
-          /* this.dataUser.map(x => {
-            console.log("Users: ", x);
-          }
-            
-          ) */
-          
+      this.userSvc.oneUserName(this.userId, this.resIdsUniques[i]).subscribe(
+        (res: any) => {
+          this.dataUser.push(res.data);
+          //console.log("Users: ", this.dataUser);
         }
       )
     }
+
     /* this.userSvc.allUsers().subscribe(
       res => {
         this.users = res;

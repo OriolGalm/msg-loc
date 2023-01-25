@@ -7,20 +7,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row"></th>
-            <td>{{ dataUser.name }}</td>
-            
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-        
+        <tr *ngFor="let data of dataUser">
+            <th scope="row">{{ data.id }}</th>
+            <td (click)="msgFromUser(data.id)">{{ data.name }}</td>
         </tr>
         </tbody>
   </table>

@@ -8,6 +8,7 @@ export const environment = {
   REGISTER_URL: 'http://localhost:8080/api/register',
   UPDATE_USER: 'http://localhost:8080/api/update/',
   SHOW_USER: 'http://localhost:8080/api/show/',
+  USER_NAME: 'http://localhost:8080/api/showname/',
   ALL_USERS: 'http://localhost:8080/api/showall/',
   CHANGE_IMG: 'http://localhost:8080/api/image/',
   CLOUD_IMG: 'https://api.cloudinary.com/v1_1/dfwiywprm/image/upload/',
