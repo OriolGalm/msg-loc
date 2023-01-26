@@ -8,7 +8,7 @@ import { Message } from './../models/message';
   providedIn: 'root'
 })
 export class MessageService {
-
+  
   constructor(private readonly http: HttpClient) { }
 
   public sendMesssage(user_id: number, msg: Message): Observable<any> {

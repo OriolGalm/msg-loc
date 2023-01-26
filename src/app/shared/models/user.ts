@@ -4,5 +4,7 @@ export interface User {
     password: string,
     name?: string,
     image?: string,
-    message?: string
+    message?: string,
+    created_at: Date,
+    updated_at?: Date
 }

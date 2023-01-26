@@ -3,6 +3,7 @@ import { MessageService } from 'src/app/shared/services/message.service';
 import { Message } from 'src/app/shared/models/message';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { InfoUser } from 'src/app/shared/models/infoUser';
 
 @Component({
   selector: 'app-list-profiles',
@@ -19,6 +20,7 @@ export class ListProfilesComponent implements OnInit {
   public message!: [Message];
   public users!: any;
   public dataUser: any = [];
+  //public selection!: InfoUser;
 
   constructor(private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
@@ -27,6 +29,7 @@ export class ListProfilesComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
     this.getIds(this.userId);
+    //this.userSvc.selectedUser$.subscribe((user: InfoUser) => this.selection = user);
   }
 
   public messageUsers(id: number, idRequest: number): void{
@@ -43,7 +46,14 @@ export class ListProfilesComponent implements OnInit {
   }
 
   public msgFromUser(idFromUser: number): void{
-    this.messageUsers(this.userId, idFromUser);
+    this.dataUser.forEach(async(user: any) => {
+      if(user.id == idFromUser){
+        let allUserObj = user;
+        const {created_at, email, message, password, updated_at, ...infoUserObj} = allUserObj;
+        this.userSvc.setUser(infoUserObj);
+      }
+    })
+    //this.messageUsers(this.userId, idFromUser);
   }
 
   private getIds(id: number): void{
