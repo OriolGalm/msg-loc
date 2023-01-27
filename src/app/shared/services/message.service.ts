@@ -15,7 +15,7 @@ export class MessageService {
     return this.http.post<Message>(environment.CREATE_MSG + user_id, msg);
   }
 
-  public getMessage(user_id: number, request_id: number): Observable<any> {
+  public getMessage(user_id: number | null, request_id: number): Observable<any> {
     return this.http.get<Message>(environment.GET_MSG + user_id + '/' + request_id)
   }
 
