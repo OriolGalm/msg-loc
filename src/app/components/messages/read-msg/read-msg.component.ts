@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InfoUser } from 'src/app/shared/models/infoUser';
 import { Message } from 'src/app/shared/models/message';
 import { MessageService } from 'src/app/shared/services/message.service';
@@ -19,16 +20,21 @@ export class ReadMsgComponent implements OnInit {
   idFromUser!: number;
   idNextFromUser!: number;
   userId!: number | null;
-  message!: [Message];
+  message: Message[] = [];
   miniatura: string = "./../../assets/img/clouds.jpg";
 
   constructor(private readonly userSvc: UserService,
     private readonly msgSvc: MessageService,
-    private readonly tokenSvc: TokenService) { }
+    private readonly tokenSvc: TokenService,
+    private readonly router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
     this.userInfo();
+
+    addEventListener("load", () => {
+      this.router.navigate(['msg/write']);
+    });
   }
 
   private userInfo(): void {
