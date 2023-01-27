@@ -35,14 +35,14 @@ export class HomeComponent implements OnInit {
 
   private initLoginForm(): void{
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 
   private initSignupForm(): void{
     this.signupForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(60)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
@@ -65,17 +65,8 @@ export class HomeComponent implements OnInit {
             this.tokenSvc.setToken(data.data.token);
             this.router.navigate(['user']);
             this.errorShow = false;
-            //console.log("Usuari loguejat: ", data.error);
         }}
       })
-    }else{
-      const errorFront = "Fill in the blanks";
-      this.errorArray = [];
-      this.errorArray.push(errorFront);
-      this.errorShow = true;
-        setTimeout(() => {
-          this.errorShow = false;
-        }, 10000);
     }
   }
 
