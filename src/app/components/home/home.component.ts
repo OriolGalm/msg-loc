@@ -67,6 +67,14 @@ export class HomeComponent implements OnInit {
             this.errorShow = false;
         }}
       })
+    }else{
+      const errorFront = "Invalid";
+      this.errorArray = [];
+      this.errorArray.push(errorFront);
+      this.errorShow = true;
+        setTimeout(() => {
+          this.errorShow = false;
+        }, 8000);
     }
   }
 
@@ -81,13 +89,13 @@ export class HomeComponent implements OnInit {
             this.errorShow = true;
             setTimeout(() => {
               this.errorShow = false;
-            }, 10000);
+            }, 8000);
           }else{
             this.successMessage;
             this.successShow = true;
             setTimeout(() => {
               this.successShow = false;
-            }, 10000);
+            }, 8000);
             this.modalHide.nativeElement.click();
           }
         }
@@ -99,7 +107,7 @@ export class HomeComponent implements OnInit {
       this.errorShow = true;
         setTimeout(() => {
           this.errorShow = false;
-        }, 10000);
+        }, 8000);
     }
   }
 

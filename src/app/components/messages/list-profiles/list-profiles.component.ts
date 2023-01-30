@@ -3,6 +3,7 @@ import { MessageService } from 'src/app/shared/services/message.service';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
+import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
 
 @Component({
   selector: 'app-list-profiles',
@@ -19,7 +20,8 @@ export class ListProfilesComponent implements OnInit {
 
   constructor(private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
-    private readonly userSvc: UserService) { }
+    private readonly userSvc: UserService,
+    private readonly localStorageSvc: LocalstorageService) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
@@ -31,7 +33,7 @@ export class ListProfilesComponent implements OnInit {
       if(user.id == idFromUser){
         let allUserObj = user;
         const {created_at, email, message, password, updated_at, ...infoUserObj} = allUserObj;
-        this.userSvc.setUser(infoUserObj);
+        this.localStorageSvc.setUser(infoUserObj);
       }
     })
   }
