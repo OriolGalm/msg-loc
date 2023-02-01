@@ -3,4 +3,19 @@
     position:absolute;
     left:0px;
     top:80px;
+    .nameBody{
+        border: 1px solid var(--secondark);
+        
+        .nameRow{
+            background:var(--second);
+            color: white;
+            cursor: pointer;
+            padding:10px !important;
+        }
+        .nameRow:hover{
+            background: white;
+            color: var(--secondark)
+        }
+    }
+    
 }

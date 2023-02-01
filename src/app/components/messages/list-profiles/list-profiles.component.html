@@ -6,8 +6,8 @@
             <th scope="col">User</th>
         </tr>
         </thead>
-        <tbody>
-        <tr *ngFor="let data of dataUser">
+        <tbody class="nameBody">
+        <tr *ngFor="let data of dataUser" class="nameRow">
             <th scope="row">{{ data.id }}</th>
             <td routerLink="msg/read" (click)="msgFromUser(data.id)">{{ data.name }}</td>
         </tr>

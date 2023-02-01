@@ -1,31 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { InfoUser } from '../models/infoUser';
 import { User } from '../models/user';
-
-/* const sendUser: InfoUser = {
-  id: '',
-  name: '',
-  image: ''
-}; */
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  //private msgUser$ = new BehaviorSubject<InfoUser>(sendUser);
 
   constructor(private readonly http: HttpClient) { }
-
-  /* get selectedUser$(): Observable<InfoUser> {
-    return this.msgUser$.asObservable();
-  }
-
-  setUser(user: InfoUser): void {
-    this.msgUser$.next(user);
-  } */
 
   public updateUser(userId: number, user: User): Observable<void>{
     return this.http.put<void>(environment.UPDATE_USER + userId, user);
