@@ -1,21 +1,41 @@
 .list{
-    width:30%;
     position:absolute;
     left:0px;
     top:80px;
+    width:24%;
     .nameBody{
-        border: 1px solid var(--secondark);
+        border: 1px solid rgb(152, 151, 151);
         
         .nameRow{
-            background:var(--second);
+            background:var(--seconDDark);
             color: white;
             cursor: pointer;
             padding:10px !important;
+            .listNames{
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+            .listNames:hover{
+                color: rgb(0, 255, 72);
+            }
+            .iconList {
+                display: flex;
+                justify-content:space-around;
+                padding-top: 14px;
+                font-size: 1rem;
+            }
+            .iconList>i{
+                display:flex;
+                justify-content: space-around;
+            }
+            .iconList>i:nth-child(1):hover{
+                color: rgb(0, 255, 72);
+            }
+            .iconList>i:nth-child(2):hover{
+                color: rgb(0, 255, 72);
+            }
         }
-        .nameRow:hover{
-            background: white;
-            color: var(--secondark)
-        }
+        
     }
     
 }

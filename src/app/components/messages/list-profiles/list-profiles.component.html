@@ -1,15 +1,16 @@
 <div class="container list">
-    <table class="">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">User</th>
-        </tr>
-        </thead>
+    <table class="table table-borderless">
+        
         <tbody class="nameBody">
-        <tr *ngFor="let data of dataUser" class="nameRow">
-            <th scope="row">{{ data.id }}</th>
-            <td routerLink="msg/read" (click)="msgFromUser(data.id)">{{ data.name }}</td>
+        <tr *ngFor="let data of dataUser index as i;" class="nameRow">
+            <!-- <th scope="row">{{ i + 1 }}</th> -->
+            <td routerLink="msg/read" (click)="msgFromUser(data.id)" class="listNames">
+                {{ data.name }}
+            </td>
+            <div class="iconList">
+                <i class="fa-solid fa-trash" ></i>
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
         </tr>
         </tbody>
   </table>
