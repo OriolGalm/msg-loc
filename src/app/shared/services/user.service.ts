@@ -15,11 +15,11 @@ export class UserService {
     return this.http.put<void>(environment.UPDATE_USER + userId, user);
   }
 
-  public oneUser(userId: number): Observable<any> {
+  public loggedUser(userId: number): Observable<any> {
     return this.http.get<User>(environment.SHOW_USER + userId);
   }
 
-  public oneUserName(userId: number, userNameId: number): Observable<any> {
+  public oneUserInfo(userId: number, userNameId: number): Observable<any> {
     return this.http.get<any>(environment.USER_NAME + userId + '/' + userNameId);
   }
 

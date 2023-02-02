@@ -13,10 +13,11 @@ import { LocalstorageService } from 'src/app/shared/services/localstorage.servic
 export class ListProfilesComponent implements OnInit {
 
   private userId!: any;
-  public allMsgUsersId!: number;
-  public resIds: number[] = [];
-  public resIdsUniques: number[] = [];
-  public dataUser: User[] = [];
+  private resIds: number[] = [];
+  private resIdsUniques: number[] = [];
+  dataUser: User[] = [];
+  selectedUser!: User | null;
+  hide = Array(this.dataUser.length).fill(false);
 
   constructor(private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
@@ -53,12 +54,33 @@ export class ListProfilesComponent implements OnInit {
 
   private usersInfo(): void{
     for(let i = 0; i < this.resIdsUniques.length; i++){
-      this.userSvc.oneUserName(this.userId, this.resIdsUniques[i]).subscribe(
+      this.userSvc.oneUserInfo(this.userId, this.resIdsUniques[i]).subscribe(
         res => {
           this.dataUser.push(res.data);
         }
       )
     }
   }
+
+  selectIdDeleteBlock(id: number): void {
+    this.userSvc.oneUserInfo(this.userId, id).subscribe(res => {
+      this.selectedUser = res.data;
+    })
+  }
+
+  blockUnblockUser(index: number): void {
+    console.log("Index: ", index);
+    this.hide[index] = !this.hide[index];
+    if(this.hide[index]){
+      this.blockUser(index);
+    }else{
+      this.unblockUser(index);
+    }
+  }
+
+  blockUser(index: number){
+
+  }
+  unblockUser(id: number){}
 
 }

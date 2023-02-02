@@ -4,14 +4,66 @@
         <tbody class="nameBody">
         <tr *ngFor="let data of dataUser index as i;" class="nameRow">
             <!-- <th scope="row">{{ i + 1 }}</th> -->
-            <td routerLink="msg/read" (click)="msgFromUser(data.id)" class="listNames">
+            <td routerLink="msg/read" (click)="msgFromUser(data.id)" class="listNames" 
+                [ngClass]="{'listNamesBlock': hide[i], 'listNames': !hide[i]}">
                 {{ data.name }}
             </td>
             <div class="iconList">
-                <i class="fa-solid fa-trash" ></i>
-                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                    <i class="fa-solid fa-trash" data-bs-toggle="tooltip" title="Delete User"
+                        data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                        (click)="selectIdDeleteBlock(data.id)"></i>
+                </div>
+                <!-- <i class="fa-solid fa-shield-halved" data-bs-toggle="tooltip" title="Block User"
+                    data-bs-toggle="modal" data-bs-target="#blockModal" 
+                    (click)="selectIdDeleteBlock(data.id)"></i> -->
+                <div id="div-eye" [attr.aria-pressed]="hide[i]" (click)="blockUnblockUser(i)" 
+                    (click)="selectIdDeleteBlock(data.id)" data-bs-toggle="tooltip" 
+                    [title]="hide[i] ? 'Unblock User' : 'Block User'" 
+                    [ngClass]="{'iconListUnblock': hide[i], 'iconListBlock': !hide[i]}">  
+                    <i class="{{hide[i] ? 'fa-solid fa-ban' : 'fa-solid fa-shield-halved'}}"></i>
+                </div>
             </div>
         </tr>
         </tbody>
   </table>
+</div>
+
+<!-- Modal Delete User-->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete User</h1>
+          <i class="fa-solid fa-exclamation iconExclamation"></i>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            You are about to delete {{ selectedUser?.name }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal Block User-->
+<div class="modal fade" id="blockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Block User</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            You are about to block {{ selectedUser?.name }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
 </div>

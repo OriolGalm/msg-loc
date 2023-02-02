@@ -50,7 +50,7 @@ export class UserComponent implements OnInit {
   }
 
   public showUser(id: number){
-    this.userSvc.oneUser(id).subscribe(
+    this.userSvc.loggedUser(id).subscribe(
       res => {this.userData = res.data;
         if(this.userData.image != null){
           this.sendImg = `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/${this.userData.image}`;
