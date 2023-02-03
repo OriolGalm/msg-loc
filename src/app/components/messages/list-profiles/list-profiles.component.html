@@ -5,7 +5,7 @@
         <tr *ngFor="let data of dataUser index as i;" class="nameRow">
             <!-- <th scope="row">{{ i + 1 }}</th> -->
             <td routerLink="msg/read" (click)="msgFromUser(data.id)" class="listNames" 
-                [ngClass]="{'listNamesBlock': hide[i], 'listNames': !hide[i]}">
+                [ngClass]="{'listNamesBlock': hide[data.id], 'listNames': !hide[data.id]}">
                 {{ data.name }}
             </td>
             <div class="iconList">
@@ -17,11 +17,11 @@
                 <!-- <i class="fa-solid fa-shield-halved" data-bs-toggle="tooltip" title="Block User"
                     data-bs-toggle="modal" data-bs-target="#blockModal" 
                     (click)="selectIdDeleteBlock(data.id)"></i> -->
-                <div id="div-eye" [attr.aria-pressed]="hide[i]" (click)="blockUnblockUser(i)" 
+                <div id="div-eye" [attr.aria-pressed]="hide[data.id]" (click)="blockUnblockUser(data.id)" 
                     (click)="selectIdDeleteBlock(data.id)" data-bs-toggle="tooltip" 
-                    [title]="hide[i] ? 'Unblock User' : 'Block User'" 
-                    [ngClass]="{'iconListUnblock': hide[i], 'iconListBlock': !hide[i]}">  
-                    <i class="{{hide[i] ? 'fa-solid fa-ban' : 'fa-solid fa-shield-halved'}}"></i>
+                    [title]="hide[data.id] ? 'Unblock User' : 'Block User'" 
+                    [ngClass]="{'iconListUnblock': hide[data.id], 'iconListBlock': !hide[data.id]}">  
+                    <i class="{{hide[data.id] ? 'fa-solid fa-ban' : 'fa-solid fa-shield-halved'}}"></i>
                 </div>
             </div>
         </tr>

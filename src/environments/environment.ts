@@ -14,7 +14,9 @@ export const environment = {
   CLOUD_IMG: 'https://api.cloudinary.com/v1_1/dfwiywprm/image/upload/',
   CREATE_MSG: 'http://localhost:8080/api/text/',
   GET_ID: 'http://localhost:8080/api/getid/',
-  GET_MSG: 'http://localhost:8080/api/gettext/'
+  GET_MSG: 'http://localhost:8080/api/gettext/',
+  BLOCK_USER: 'http://localhost:8080/api/block/',
+  GET_BLOCKED: 'http://localhost:8080/api/getblocked/',
 };
 
 /*

@@ -17,6 +17,8 @@ export class ListProfilesComponent implements OnInit {
   private resIdsUniques: number[] = [];
   dataUser: User[] = [];
   selectedUser!: User | null;
+  private idBlockedUser: number[] = [];
+  idBlockedUsersUniques: number[] = [];
   hide = Array(this.dataUser.length).fill(false);
 
   constructor(private readonly msgSvc: MessageService,
@@ -48,6 +50,7 @@ export class ListProfilesComponent implements OnInit {
           this.resIdsUniques = [...new Set(this.resIds)];
         })
         this.usersInfo();
+        this.blockedUsers();
       }
     )
   }
@@ -69,8 +72,13 @@ export class ListProfilesComponent implements OnInit {
   }
 
   blockUnblockUser(index: number): void {
-    console.log("Index: ", index);
-    this.hide[index] = !this.hide[index];
+    
+    this.idBlockedUser.push(index);
+    this.idBlockedUsersUniques = [...new Set(this.idBlockedUser)];
+    
+      this.hide[index] = !this.hide[index];
+      console.log("Data Id: ", index);
+    //}
     if(this.hide[index]){
       this.blockUser(index);
     }else{
@@ -82,5 +90,13 @@ export class ListProfilesComponent implements OnInit {
 
   }
   unblockUser(id: number){}
+
+  blockedUsers(){
+    this.msgSvc.getBlockedUser(this.userId).subscribe(
+      res => res.data.map( (id: any) => {
+        this.idBlockedUser.push(id.user_blocked);
+        console.log("BlockedUser: ", this.idBlockedUser);
+      }))
+  }
 
 }

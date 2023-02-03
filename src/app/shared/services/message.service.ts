@@ -22,4 +22,12 @@ export class MessageService {
   public getIdUsers(user_id: number): Observable<any> {
     return this.http.get<number>(environment.GET_ID + user_id);
   }
+
+  public blockUser(user_id: number, blocked_user_id: number): Observable<number> {
+    return this.http.post<number>(environment.BLOCK_USER + user_id, blocked_user_id);
+  }
+
+  public getBlockedUser(user_id: number): Observable<any> {
+    return this.http.get<number>(environment.GET_BLOCKED + user_id);
+  }
 }
