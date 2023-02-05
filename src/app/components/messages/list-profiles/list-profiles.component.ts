@@ -4,6 +4,7 @@ import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
+import { isEmpty, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-profiles',
@@ -11,15 +12,16 @@ import { LocalstorageService } from 'src/app/shared/services/localstorage.servic
   styleUrls: ['./list-profiles.component.scss']
 })
 export class ListProfilesComponent implements OnInit {
-
   private userId!: any;
   private resIds: number[] = [];
   private resIdsUniques: number[] = [];
-  dataUser: User[] = [];
+  dataUser:User[] = [];
   selectedUser!: User | null;
   private idBlockedUser: number[] = [];
   idBlockedUsersUniques: number[] = [];
   hide = Array(this.dataUser.length).fill(false);
+  userObj = Array(this.dataUser.length).fill(false);
+  arrayUser: any = [];
 
   constructor(private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
@@ -31,7 +33,28 @@ export class ListProfilesComponent implements OnInit {
     this.getIds(this.userId);
   }
 
-  public msgFromUser(idFromUser: number): void{
+  public msgFromUser(id: number): void {
+    let idBlocked = this.idBlockedUser.find(x => id == x)
+      if(idBlocked != undefined){
+      }else{
+        this.msgFromValidUser(id);
+        this.selectedUserMsg(id);
+      }
+  }
+
+  private selectedUserMsg(id: number): void {
+    if(this.arrayUser.length == 0){
+      this.arrayUser.push(id);
+      this.userObj[this.arrayUser] = !this.userObj[this.arrayUser];
+    }else{
+      this.userObj[this.arrayUser] = !this.userObj[this.arrayUser];
+      this.arrayUser.pop();
+      this.arrayUser.push(id);
+      this.userObj[this.arrayUser] = !this.userObj[this.arrayUser];
+    }
+  }
+
+  private msgFromValidUser(idFromUser: number): void{
     this.dataUser.forEach(async(user: any) => {
       if(user.id == idFromUser){
         let allUserObj = user;
@@ -55,48 +78,54 @@ export class ListProfilesComponent implements OnInit {
     )
   }
 
-  private usersInfo(): void{
+  private usersInfo(){
     for(let i = 0; i < this.resIdsUniques.length; i++){
       this.userSvc.oneUserInfo(this.userId, this.resIdsUniques[i]).subscribe(
         res => {
-          this.dataUser.push(res.data);
+          this.dataUser.push(res.data); /* = this.dataUser.pipe(
+            map((array: User[]) => {
+              array.push(res);
+              return array;
+            })
+          ) */
         }
       )
     }
   }
 
-  selectIdDeleteBlock(id: number): void {
+  /* selectIdDeleteBlock(id: number): void {
     this.userSvc.oneUserInfo(this.userId, id).subscribe(res => {
       this.selectedUser = res.data;
     })
-  }
+  } */
 
-  blockUnblockUser(index: number): void {
-    
-    this.idBlockedUser.push(index);
-    this.idBlockedUsersUniques = [...new Set(this.idBlockedUser)];
-    
-      this.hide[index] = !this.hide[index];
-      console.log("Data Id: ", index);
-    //}
-    if(this.hide[index]){
-      this.blockUser(index);
-    }else{
-      this.unblockUser(index);
-    }
-  }
-
-  blockUser(index: number){
-
-  }
-  unblockUser(id: number){}
-
-  blockedUsers(){
+  private blockedUsers(){
     this.msgSvc.getBlockedUser(this.userId).subscribe(
       res => res.data.map( (id: any) => {
         this.idBlockedUser.push(id.user_blocked);
-        console.log("BlockedUser: ", this.idBlockedUser);
-      }))
+        for(let y = 0; y < this.idBlockedUser.length; y++){
+          let coco = this.idBlockedUser[y];
+          this.hide[coco] = true;
+        }
+      })
+    )
   }
 
+  blockUnblockUser(index: number): void {
+    let ids = this.idBlockedUser.find(x => {return index == x});
+    if(ids == index){
+      let userBlockedIndex = this.idBlockedUser.indexOf(index);
+      this.idBlockedUser.splice(1, userBlockedIndex);
+      this.hide[index] = !this.hide[index];
+      this.msgSvc.unBlockUser(this.userId, index).subscribe(
+        res => res
+      )
+    }else{
+      this.idBlockedUser.push(index);
+      this.hide[index] = !this.hide[index];
+      this.msgSvc.blockUser(this.userId, index).subscribe(
+        res => res
+      );
+    }
+  }
 }

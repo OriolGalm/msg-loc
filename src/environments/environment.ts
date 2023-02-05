@@ -16,6 +16,7 @@ export const environment = {
   GET_ID: 'http://localhost:8080/api/getid/',
   GET_MSG: 'http://localhost:8080/api/gettext/',
   BLOCK_USER: 'http://localhost:8080/api/block/',
+  UNBLOCK_USER: 'http://localhost:8080/api/unblock/',
   GET_BLOCKED: 'http://localhost:8080/api/getblocked/',
 };
 

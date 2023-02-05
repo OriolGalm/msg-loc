@@ -24,7 +24,11 @@ export class MessageService {
   }
 
   public blockUser(user_id: number, blocked_user_id: number): Observable<number> {
-    return this.http.post<number>(environment.BLOCK_USER + user_id, blocked_user_id);
+    return this.http.post<number>(`${environment.BLOCK_USER}/${user_id}/${blocked_user_id}`, {});
+  }
+
+  public unBlockUser(user_id: number, blocked_user_id: number): Observable<number> {
+    return this.http.post<number>(`${environment.UNBLOCK_USER}/${user_id}/${blocked_user_id}`, {});
   }
 
   public getBlockedUser(user_id: number): Observable<any> {

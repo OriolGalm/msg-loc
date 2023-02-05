@@ -3,11 +3,12 @@
     left:0px;
     top:80px;
     width:26%;
+    opacity: 1;
     .nameBody{
-        border: 1px solid rgb(152, 151, 151);
+        border: 1px solid #00ffff;
         
         .nameRow{
-            background:var(--seconDDark);
+            background:var(--secondary);
             color: white;
             cursor: pointer;
             padding:10px !important;
@@ -16,7 +17,7 @@
                     font-weight: 600;
             }
             .listNames:hover{
-                color: rgb(0, 255, 72);
+                color: var(--primary);
             }
             .listNamesBlock{
                 font-size: 1.1rem;
@@ -26,11 +27,17 @@
             .listNamesBlock:hover{
                 cursor: auto;
             }
+            .listNamesSelected{
+                color:var(--primary);
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
             .iconList {
                 display: flex;
                 justify-content:space-around;
                 padding-top: 14px;
                 font-size: 1rem;
+                color: white;
             }
             .iconList i{
                 display:flex;
