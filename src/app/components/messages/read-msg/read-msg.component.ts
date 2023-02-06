@@ -17,10 +17,11 @@ export class ReadMsgComponent implements OnInit {
   userObj!: InfoUser;
   userImage!: string;
   idFromUser!: number;
-  idNextFromUser!: number;
   userId!: number | null;
   message: Message[] = [];
   miniatura: string = "./../../assets/img/clouds.jpg";
+ /*  userName!: any[];
+  usersObjName: number[] = []; */
 
   constructor(
     private readonly msgSvc: MessageService,
@@ -43,10 +44,7 @@ export class ReadMsgComponent implements OnInit {
           this.userImage = this.miniatura;
         }
         this.idFromUser = parseInt(this.userObj.id);
-        if(this.idFromUser != this.idNextFromUser){
-          this.idNextFromUser = this.idFromUser;
-          this.messageUsers(this.userId, this.idFromUser);
-        }
+        this.messageUsers(this.userId, this.idFromUser);
       }
     )
   }
@@ -55,8 +53,24 @@ export class ReadMsgComponent implements OnInit {
     this.msgSvc.getMessage(id, idRequest).subscribe(
       res => {
         this.message = res.data;
+        //this.getName(this.userId);
+        //console.log("Message: ", this.message);
       }
     )
   }
 
+  /* private getName(userId: number | null): void {
+    let currentUserId: any;
+    this.selectedUser$.subscribe(x => currentUserId = x.id)
+    this.message.map(res => {
+      this.usersObjName.push(res.id_send);
+      console.log("User: ", this.usersObjName);
+      this.msgSvc.getUserName(userId, currentUserId).subscribe(x => {
+        this.userName = x.data;
+        console.log("Name: ", this.userName this.selectedUser$.subscribe(x => console.log(x.name)) );
+      })
+      
+    })
+  } */
+ 
 }

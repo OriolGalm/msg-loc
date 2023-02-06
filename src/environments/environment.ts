@@ -18,6 +18,7 @@ export const environment = {
   BLOCK_USER: 'http://localhost:8080/api/block/',
   UNBLOCK_USER: 'http://localhost:8080/api/unblock/',
   GET_BLOCKED: 'http://localhost:8080/api/getblocked/',
+  GET_NAME: 'http://localhost:8080/api/getname/',
 };
 
 /*

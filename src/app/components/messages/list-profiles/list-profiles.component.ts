@@ -93,11 +93,11 @@ export class ListProfilesComponent implements OnInit {
     }
   }
 
-  /* selectIdDeleteBlock(id: number): void {
+  selectIdDeleteBlock(id: number): void {
     this.userSvc.oneUserInfo(this.userId, id).subscribe(res => {
       this.selectedUser = res.data;
     })
-  } */
+  }
 
   private blockedUsers(){
     this.msgSvc.getBlockedUser(this.userId).subscribe(
