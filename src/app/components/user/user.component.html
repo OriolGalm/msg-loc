@@ -26,6 +26,7 @@
             </button> -->
         </div>
     </div>
+    <div class="errorText" *ngIf="errorB == true">{{ errorText }}</div>
 
     <form *ngIf="hideForm == false" (ngSubmit)="onUpdate(userData)">
         <input type="text" class="form-control w-25 my-2" [(ngModel)]="userData.name" name="name">
@@ -33,5 +34,5 @@
         <button class="btn btn-outline-primary my-3 me-2 mx-auto" type="submit">Edit</button>
     </form>
     
-    <p>Write some text:</p>
+    
 </div>

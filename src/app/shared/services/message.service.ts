@@ -11,7 +11,7 @@ export class MessageService {
   
   constructor(private readonly http: HttpClient) { }
 
-  public sendMesssage(user_id: number, msg: Message): Observable<any> {
+  public sendMesssage(user_id: number | null, msg: Message): Observable<any> {
     return this.http.post<Message>(environment.CREATE_MSG + user_id, msg);
   }
 

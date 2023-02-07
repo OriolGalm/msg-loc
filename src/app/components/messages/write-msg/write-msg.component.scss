@@ -3,4 +3,22 @@
     top: 74px;
     left: 30%;
     width: 70%;
+    #search{
+        width:40%;
+    }
+    form{
+        width: 100%;
+        
+        #subject{
+            width:40%;
+        }
+        #text{
+            height: 200px;
+            width: 80%;
+        }
+        .sendMsg{
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+    }
 }

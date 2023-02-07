@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -19,6 +19,8 @@ export class UserComponent implements OnInit {
   public miniatura: any = "./../../assets/img/clouds.jpg";
   public errorShow: boolean = false;
   public errorImg: string = "This image cannot be larger than 1Mb";
+  errorText: string = "This text is too large";
+  errorB: boolean = false;
 
   constructor(public readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
@@ -39,13 +41,18 @@ export class UserComponent implements OnInit {
 
   public async onUpdate(value: any){
     //const token: any = this.tokenSvc.getToken();
-    if(this.updateForm.value.name != value.name || this.updateForm.value.message != value.message){
-      this.userSvc.updateUser(this.userId, value).subscribe(
-        res => console.log("Update: ", res)
-      )
-      this.hideForm = !this.hideForm;
+    if(value.message.length > 100 || value.name.length > 40){
+      this.errorB = true;
     }else{
-      this.hideForm = !this.hideForm;
+      if(this.updateForm.value.name != value.name || this.updateForm.value.message != value.message){
+        this.userSvc.updateUser(this.userId, value).subscribe(
+          res => console.log("Update: ", res)
+        )
+        this.errorB = false;
+        this.hideForm = !this.hideForm;
+      }else{
+        this.hideForm = !this.hideForm;
+      }
     }
   }
 

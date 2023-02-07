@@ -58,7 +58,7 @@ export class ListProfilesComponent implements OnInit {
     this.dataUser.forEach(async(user: any) => {
       if(user.id == idFromUser){
         let allUserObj = user;
-        const {created_at, email, message, password, updated_at, ...infoUserObj} = allUserObj;
+        const {created_at, email, password, updated_at, ...infoUserObj} = allUserObj;
         this.localStorageSvc.setUser(infoUserObj);
       }
     })

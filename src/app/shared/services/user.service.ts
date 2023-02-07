@@ -23,7 +23,7 @@ export class UserService {
     return this.http.get<any>(environment.USER_NAME + userId + '/' + userNameId);
   }
 
-  public allUsers(): Observable<User> {
+  public allUsers(): Observable<any> {
     return this.http.get<User>(environment.ALL_USERS);
   }
 

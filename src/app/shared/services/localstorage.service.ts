@@ -5,7 +5,8 @@ import { InfoUser } from '../models/infoUser';
 const sendUser: InfoUser = {
   id: '',
   name: '',
-  image: ''
+  image: '',
+  message: ''
 };
 
 @Injectable({

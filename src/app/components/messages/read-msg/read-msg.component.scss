@@ -18,21 +18,48 @@
     overflow: hidden;
     border-radius: 50%;
     margin-right:0px;
-    float:left;
     #avatarImg{
         width: 100%;
         height: 100%;
     }
 }
-.name{
-    font-size: 1.7rem;
-    font-weight: 500;
-    margin: 0px 0px 0px 100px;
-    padding-top: 10px;
+.nameMsg{
+    margin-top: 10px;
+    .name{
+        font-size: 1.7rem;
+        font-weight: 500;
+        margin: 0px 20px 0px 100px;
+        width: auto;
+        float:left;
+    }
+    #msgAvatar{
+        margin-right: 10px;
+        height: auto;
+    }
 }
+.newMsg{
+    margin: 15px 10px 30px 103px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 150px;
+    height: 36px;
+    padding-top: 2px;
+    border-radius: 4px;
+    text-align: center;
+    color: var(--primaryLima);
+    background-color: var(--secondaryLima);
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.newMsg:hover{
+    background-color: black;
+    outline: 1px solid var(--third);
+    color: var(--third);
+}
+
 .messages{
     position: absolute;
-    top:100px;
+    top:140px;
     left:0px;
     .articleMsg{
         padding: 0px 8px;
@@ -40,14 +67,14 @@
     }
 }
 .msgLoggedUser{
-    background: var(--primaryBrown);
-    color: var(--secondaryBrown);
+    background: var(--green);
+    color: var(--secondaryWhite);
     width: 80%;
     margin-right: 20%;
 }
 .msgOtherUser{
     background: var(--secondary);
-    color: var(--secondaryBrown);
+    color: var(--secondaryWhite);
     width: 80%;
     margin-left: 20%;
 }

@@ -1,8 +1,14 @@
 <div class="container read">
-    <div class="avatarBox">
-        <img [src]="userImage" id="avatarImg">
+    <div>
+        <div class="avatarBox">
+            <img [src]="userImage" id="avatarImg">
+        </div>
+        <div class="nameMsg">
+            <h4 class="name">{{ (selectedUser$ | async)?.name }}</h4>
+            <p id="msgAvatar">{{ (selectedUser$ | async)?.message }}</p>
+        </div>
     </div>
-    <p class="name">{{ (selectedUser$ | async)?.name }}</p>
+    <div class="newMsg" routerLink="msg/write">New Message</div>
 
     <section class="container messages">
         <article class="articleMsg" *ngFor="let msg of message" 
