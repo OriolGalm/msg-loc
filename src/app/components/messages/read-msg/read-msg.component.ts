@@ -4,8 +4,7 @@ import { Message } from 'src/app/shared/models/message';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
 import { MessageService } from 'src/app/shared/services/message.service';
 import { TokenService } from 'src/app/shared/services/token.service';
-
-const URL_IMG = `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/`;
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-read-msg',
@@ -19,7 +18,6 @@ export class ReadMsgComponent implements OnInit {
   idFromUser!: number;
   userId!: number | null;
   message: Message[] = [];
-  miniatura: string = "./../../assets/img/clouds.jpg";
  /*  userName!: any[];
   usersObjName: number[] = []; */
 
@@ -39,9 +37,9 @@ export class ReadMsgComponent implements OnInit {
     this.localStorageSvc.selectedUser$.subscribe(
       (res: InfoUser) => {this.userObj = res;
         if(this.userObj.image !== null){
-          this.userImage = `${URL_IMG + this.userObj.image}`;
+          this.userImage = `${environment.URL_IMG + this.userObj.image}`;
         }else{
-          this.userImage = this.miniatura;
+          this.userImage = environment.DEFAULT_IMG;
         }
         this.idFromUser = parseInt(this.userObj.id);
         this.messageUsers(this.userId, this.idFromUser);
@@ -53,8 +51,6 @@ export class ReadMsgComponent implements OnInit {
     this.msgSvc.getMessage(id, idRequest).subscribe(
       res => {
         this.message = res.data;
-        //this.getName(this.userId);
-        //console.log("Message: ", this.message);
       }
     )
   }

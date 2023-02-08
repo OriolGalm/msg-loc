@@ -19,6 +19,9 @@ export const environment = {
   UNBLOCK_USER: 'http://localhost:8080/api/unblock/',
   GET_BLOCKED: 'http://localhost:8080/api/getblocked/',
   GET_NAME: 'http://localhost:8080/api/getname/',
+  URL_IMG: `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/`,
+  DEFAULT_IMG: 'assets/img/clouds.jpg',
+  GET_USER_BY_NAME: 'http://localhost:8080/api/userbyname/'
 };
 
 /*

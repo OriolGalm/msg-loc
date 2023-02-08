@@ -1,24 +1,35 @@
 <div class="container write">
-    
-        <div class="form-group">
-          <label for="search">Search some user:</label>
-          <input type="text" class="form-control" id="search" placeholder="Search User" 
-            formcontrolName="search" list="dataList">
-            <datalist id="dataList">
-              <option *ngFor="let users of usersNameList" [value]=" users ">
-            </datalist>
-        </div><br>
 
-      <form [formGroup]="msgForm" (ngSubmit)="sendMsg(msgForm.value)">
-        <div class="form-group">
-          <label for="subject">Subject:</label>
-          <input type="text" class="form-control" id="subject" placeholder="Subject" 
-            formControlName="subject">
-        </div><br>
-        <div class="form-group">
-          <label for="text">Text:</label>
-          <textarea class="form-control" id="text" formControlName="text"></textarea>
-        </div><br>
-        <button type="submit" class="btn sendMsg">Send Message</button>
-      </form>  
+  <form>
+    <div class="form-group">
+      <label for="search">Search some user:</label>
+      <input type="text" class="form-control" id="search" placeholder="Search User" 
+        [formControl]="myControl" list="dataList" (change)="nameValue($any($event.target).value)">
+      <datalist id="dataList">
+        <option *ngFor="let user of filteredOptions | async" [value]=" user">
+      </datalist>
+    </div><br>
+  </form>
+
+  <div id="userToMsg" *ngIf="userName">
+    <div class="avatarBox">
+        <img [src]="userImage" id="avatarImg">
+    </div>
+    <div class="nameMsg">
+        <h4 class="name">{{ (selectedUser$ | async)?.name }}</h4>
+    </div>
+  </div>
+
+  <form [formGroup]="msgForm" (ngSubmit)="sendMsg(msgForm.value)">
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input type="text" class="form-control" id="subject" placeholder="Subject" 
+        formControlName="subject">
+    </div><br>
+    <div class="form-group">
+      <label for="text">Text:</label>
+      <textarea class="form-control" id="text" formControlName="text"></textarea>
+    </div><br>
+    <button type="submit" class="btn sendMsg">Send Message</button>
+  </form>  
 </div>

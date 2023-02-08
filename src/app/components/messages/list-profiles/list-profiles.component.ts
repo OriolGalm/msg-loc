@@ -58,8 +58,8 @@ export class ListProfilesComponent implements OnInit {
     this.dataUser.forEach(async(user: any) => {
       if(user.id == idFromUser){
         let allUserObj = user;
-        const {created_at, email, password, updated_at, ...infoUserObj} = allUserObj;
-        this.localStorageSvc.setUser(infoUserObj);
+        //const {created_at, email, password, updated_at, ...infoUserObj} = allUserObj;
+        this.localStorageSvc.setUser(allUserObj);
       }
     })
   }
@@ -79,17 +79,14 @@ export class ListProfilesComponent implements OnInit {
   }
 
   private usersInfo(){
-    for(let i = 0; i < this.resIdsUniques.length; i++){
-      this.userSvc.oneUserInfo(this.userId, this.resIdsUniques[i]).subscribe(
-        res => {
-          this.dataUser.push(res.data); /* = this.dataUser.pipe(
-            map((array: User[]) => {
-              array.push(res);
-              return array;
-            })
-          ) */
-        }
-      )
+    if(this.resIdsUniques.length >= 1){
+      for(let i = 0; i < this.resIdsUniques.length; i++){
+        this.userSvc.oneUserInfo(this.userId, this.resIdsUniques[i]).subscribe(
+          res => {
+            this.dataUser.push(res.data); 
+          }
+        )
+      }
     }
   }
 

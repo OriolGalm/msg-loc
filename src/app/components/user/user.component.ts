@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +21,9 @@ export class UserComponent implements OnInit {
   public errorShow: boolean = false;
   public errorImg: string = "This image cannot be larger than 1Mb";
   errorText: string = "This text is too large";
+  errorName: string = "Name have to be min 3 characters";
   errorB: boolean = false;
+  errorC: boolean = false;
 
   constructor(public readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
@@ -43,12 +46,15 @@ export class UserComponent implements OnInit {
     //const token: any = this.tokenSvc.getToken();
     if(value.message.length > 100 || value.name.length > 40){
       this.errorB = true;
+    }else if(value.name.length < 3){
+      this.errorC = true;
     }else{
       if(this.updateForm.value.name != value.name || this.updateForm.value.message != value.message){
         this.userSvc.updateUser(this.userId, value).subscribe(
           res => console.log("Update: ", res)
         )
         this.errorB = false;
+        this.errorC = false;
         this.hideForm = !this.hideForm;
       }else{
         this.hideForm = !this.hideForm;
@@ -60,7 +66,7 @@ export class UserComponent implements OnInit {
     this.userSvc.loggedUser(id).subscribe(
       res => {this.userData = res.data;
         if(this.userData.image != null){
-          this.sendImg = `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/${this.userData.image}`;
+          this.sendImg = environment.URL_IMG + this.userData.image
         }else{
           this.sendImg = this.miniatura;
         }

@@ -40,4 +40,8 @@ export class UserService {
     formData.append('cloud_name', 'dfwiywprm')
     return this.http.post<File>(environment.CLOUD_IMG, formData);
   }
+
+  public userByName(userId: number, userName: string): Observable<any> {
+    return this.http.get<User>(environment.GET_USER_BY_NAME + userId + '/' + userName);
+  }
 }
