@@ -1,24 +1,30 @@
 <div class="container write">
 
-  <form>
-    <div class="form-group">
-      <label for="search">Search some user:</label>
-      <input type="text" class="form-control" id="search" placeholder="Search User" 
-        [formControl]="myControl" list="dataList" (change)="nameValue($any($event.target).value)">
-      <datalist id="dataList">
-        <option *ngFor="let user of filteredOptions | async" [value]=" user">
-      </datalist>
-    </div><br>
-  </form>
+  <div class="row">
+    <form class="col searchForm">
+      <div class="form-group">
+        <label for="search">Search some user:</label>
+        <input type="text" class="form-control" id="search" placeholder="Search User" 
+          [formControl]="myControl" list="dataList" (change)="nameValue($event)">
+        <datalist id="dataList">
+          <option *ngFor="let user of filteredOptions | async" [value]=" user">
+        </datalist>
+      </div><br>
+    </form>
+    <!-- <app-search class="col"></app-search> -->
 
-  <div id="userToMsg" *ngIf="userName">
-    <div class="avatarBox">
-        <img [src]="userImage" id="avatarImg">
-    </div>
-    <div class="nameMsg">
-        <h4 class="name">{{ (selectedUser$ | async)?.name }}</h4>
+    <div class="col-7" id="userToMsg">
+      <div *ngIf="userImage">
+        <div class="col avatarBox">
+            <img [src]="userImage" id="avatarImg">
+        </div>
+        <div class="col nameMsg">
+            <h4 class="name">{{ (selectedUser$ | async)?.name }}</h4>
+        </div>
+      </div>
     </div>
   </div>
+  
 
   <form [formGroup]="msgForm" (ngSubmit)="sendMsg(msgForm.value)">
     <div class="form-group">

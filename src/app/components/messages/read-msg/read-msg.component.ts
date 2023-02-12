@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InfoUser } from 'src/app/shared/models/infoUser';
 import { Message } from 'src/app/shared/models/message';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
@@ -15,6 +16,8 @@ export class ReadMsgComponent implements OnInit {
   selectedUser$ = this.localStorageSvc.selectedUser$;
   userObj!: InfoUser;
   userImage!: string;
+  storageName!: string |undefined;
+  storageMessage!: string |undefined;
   idFromUser!: number;
   userId!: number | null;
   message: Message[] = [];
@@ -24,7 +27,8 @@ export class ReadMsgComponent implements OnInit {
   constructor(
     private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
-    private readonly localStorageSvc: LocalstorageService) {  }
+    private readonly localStorageSvc: LocalstorageService,
+    private readonly router: Router) {  }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
@@ -33,7 +37,6 @@ export class ReadMsgComponent implements OnInit {
 
   private userInfo(): void {
     const reloadUser = JSON.parse(localStorage.getItem("userData")!);
-    this.localStorageSvc.setUser(reloadUser);
     this.localStorageSvc.selectedUser$.subscribe(
       (res: InfoUser) => {this.userObj = res;
         if(this.userObj.image !== null){
@@ -41,10 +44,13 @@ export class ReadMsgComponent implements OnInit {
         }else{
           this.userImage = environment.DEFAULT_IMG;
         }
+        this.storageName = this.userObj.name;
+        this.storageMessage = this.userObj.message;
         this.idFromUser = parseInt(this.userObj.id);
         this.messageUsers(this.userId, this.idFromUser);
       }
     )
+    this.localStorageSvc.setUser(reloadUser);
   }
 
   private messageUsers(id: number | null, idRequest: number): void{
@@ -68,5 +74,9 @@ export class ReadMsgComponent implements OnInit {
       
     })
   } */
+
+  toWrite(): void {
+    this.router.navigate(['msg/write'])
+  }
  
 }

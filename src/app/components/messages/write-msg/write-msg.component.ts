@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, Observable, startWith } from 'rxjs';
+import { first, firstValueFrom, map, Observable, startWith, take } from 'rxjs';
 import { MessageService } from 'src/app/shared/message.service';
 import { InfoUser } from 'src/app/shared/models/infoUser';
 import { User } from 'src/app/shared/models/user';
@@ -26,22 +26,26 @@ export class WriteMsgComponent implements OnInit {
   userImage!: string;
   userSelectedName!: string;
   selectedUser$ = this.localStorageSvc.selectedUser$;
-  private userObj!: InfoUser;
+  userObj!: InfoUser;
   private uniqueChars: string[] = [];
-  miniatura: string = "./../../assets/img/clouds.jpg";
-  userName: any;
+  reloadUser!: any;
+  userName!: string;
+  storageImg!: string | undefined;
+  storageName!: string | undefined;
+  miniatura: string = environment.DEFAULT_IMG;
 
   constructor(private readonly fb: FormBuilder,
     private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
-    private readonly localStorageSvc: LocalstorageService,
+    public readonly localStorageSvc: LocalstorageService,
     private readonly router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
     this.initform();
     this.filter();
+    this.userInfo();
   }
 
   private initform(): void {
@@ -54,6 +58,7 @@ export class WriteMsgComponent implements OnInit {
   sendMsg(value: any): void {
     this.msgSvc.sendMesssage(this.userId, value).subscribe(res => {
       console.log("userId: ", res);
+      this.router.navigate(['msg/read']);
     })
   }
 
@@ -77,32 +82,49 @@ export class WriteMsgComponent implements OnInit {
         this.uniqueChars = [...new Set(this.usersNameList)];
       });
     }
-    this.userInfo();
     return this.uniqueChars.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   private userInfo(): void {
-    const reloadUser = JSON.parse(localStorage.getItem("userData")!);
-    if(reloadUser != null){
-      this.localStorageSvc.setUser(reloadUser);
+    this.reloadUser = JSON.parse(localStorage.getItem("userData")!);
+    if(this.reloadUser != null){
       this.localStorageSvc.selectedUser$.subscribe(
-        (res: InfoUser) => {this.userObj = res;
-          if(this.userObj.image !== null){
+        (res: InfoUser) => {
+          this.userObj = res;
+          if (this.userObj.image !== null) {
             this.userImage = `${environment.URL_IMG + this.userObj.image}`;
-          }else{
+            console.log("UserImage: ", this.userImage);
+          } else {
             this.userImage = environment.DEFAULT_IMG;
           }
+          this.storageName = res.name
         }
       )
+      this.localStorageSvc.setUser(this.reloadUser);
     }
   }
 
-  nameValue(name:any){
-    this.userName = name;
-    this.userSvc.userByName(this.userId, this.userName).subscribe(res => {
-      if(res.data.id != this.userId)
-      this.localStorageSvc.setUser(res.data)
+  async nameValue(event: Event){
+    this.userName = (event.target as HTMLInputElement).value;
+    if(this.myControl.valid){
+      const res = await firstValueFrom(this.userSvc.userByName(this.userId, this.userName));
+        if(res.data.id != this.userId){
+          this.localStorageSvc.setUser(res.data);
+          this.userInfo();
+        }
+    }
+  }
+
+  submitSearch() {
+    const resName = this.myControl.value;
+    console.log("ResName: ", resName);
+    this.userSvc.userByName(this.userId, resName).subscribe(res => {
+      if(res.data.id != this.userId){
+        this.localStorageSvc.setUser(res.data);
+        this.userInfo();
+      }
     })
+      
   }
 
 }

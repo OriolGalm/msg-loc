@@ -4,11 +4,11 @@
             <img [src]="userImage" id="avatarImg">
         </div>
         <div class="nameMsg">
-            <h4 class="name">{{ (selectedUser$ | async)?.name }}</h4>
-            <p id="msgAvatar">{{ (selectedUser$ | async)?.message }}</p>
+            <h4 class="name">{{ storageName }}</h4>
+            <p id="msgAvatar">{{ storageMessage }}</p>
         </div>
     </div>
-    <div class="newMsg" routerLink="msg/write">New Message</div>
+    <div class="newMsg" (click)="toWrite()">New Message</div>
 
     <section class="container messages">
         <article class="articleMsg" *ngFor="let msg of message" 

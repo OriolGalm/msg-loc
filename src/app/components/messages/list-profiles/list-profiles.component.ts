@@ -5,6 +5,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
 import { isEmpty, map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-profiles',
@@ -26,7 +27,8 @@ export class ListProfilesComponent implements OnInit {
   constructor(private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
-    private readonly localStorageSvc: LocalstorageService) { }
+    private readonly localStorageSvc: LocalstorageService,
+    private readonly router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
@@ -125,4 +127,5 @@ export class ListProfilesComponent implements OnInit {
       );
     }
   }
+
 }
