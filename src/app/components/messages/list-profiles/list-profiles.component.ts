@@ -62,6 +62,8 @@ export class ListProfilesComponent implements OnInit {
         let allUserObj = user;
         //const {created_at, email, password, updated_at, ...infoUserObj} = allUserObj;
         this.localStorageSvc.setUser(allUserObj);
+    //cridar la funció de back que canvia el 'zero' a 'u' en la columna readed de la taula messages
+
       }
     })
   }

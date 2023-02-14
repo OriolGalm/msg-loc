@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first, firstValueFrom, map, Observable, startWith, take } from 'rxjs';
+import { firstValueFrom, map, Observable, startWith, take } from 'rxjs';
 import { MessageService } from 'src/app/shared/message.service';
 import { InfoUser } from 'src/app/shared/models/infoUser';
+import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
 import { TokenService } from 'src/app/shared/services/token.service';
@@ -33,6 +34,7 @@ export class WriteMsgComponent implements OnInit {
   storageImg!: string | undefined;
   storageName!: string | undefined;
   miniatura: string = environment.DEFAULT_IMG;
+  idReceive!: number;
 
   constructor(private readonly fb: FormBuilder,
     private readonly msgSvc: MessageService,
@@ -43,21 +45,27 @@ export class WriteMsgComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
-    this.initform();
+    this.selectedUser$.subscribe(res => {
+      if(res){
+        this.idReceive = parseInt(res.id);
+        this.initform();
+      }
+    })
     this.filter();
     this.userInfo();
   }
 
   private initform(): void {
     this.msgForm = this.fb.group({
+      id_receive: [this.idReceive, Validators.required],
       subject: [''],
-      text: ['']
-    })
+      text: [''],
+      readed: [0]
+    });
   }
 
-  sendMsg(value: any): void {
+  sendMsg(value: Message): void {
     this.msgSvc.sendMesssage(this.userId, value).subscribe(res => {
-      console.log("userId: ", res);
       this.router.navigate(['msg/read']);
     })
   }
@@ -100,6 +108,7 @@ export class WriteMsgComponent implements OnInit {
           this.storageName = res.name
         }
       )
+      
       this.localStorageSvc.setUser(this.reloadUser);
     }
   }
