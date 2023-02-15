@@ -35,6 +35,7 @@ export class WriteMsgComponent implements OnInit {
   storageName!: string | undefined;
   miniatura: string = environment.DEFAULT_IMG;
   idReceive!: number;
+  initialReader: number = 0; 
 
   constructor(private readonly fb: FormBuilder,
     private readonly msgSvc: MessageService,
@@ -60,11 +61,12 @@ export class WriteMsgComponent implements OnInit {
       id_receive: [this.idReceive, Validators.required],
       subject: [''],
       text: [''],
-      readed: [0]
+      readed: [this.initialReader]
     });
   }
 
   sendMsg(value: Message): void {
+    console.log("Readed: ", value);
     this.msgSvc.sendMesssage(this.userId, value).subscribe(res => {
       this.router.navigate(['msg/read']);
     })
@@ -133,7 +135,6 @@ export class WriteMsgComponent implements OnInit {
         this.userInfo();
       }
     })
-      
   }
 
 }

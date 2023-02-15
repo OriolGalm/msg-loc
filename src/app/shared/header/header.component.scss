@@ -1,5 +1,47 @@
+.supbar{
+    background-color: var(--secondary);
+    a{
+        color: white;
+    }
+    a:hover{
+        color: var(--primary)
+    }
+}
 #logout{
     cursor:pointer;
-    color: maroon;
+    color: var(--primary);
     
+}
+.msg{
+    cursor: pointer;
+}
+.newNames{
+    position: absolute;
+    top:60px;
+    left: 200px;
+    display:none;
+    background-color: var(--secondary);
+    color: var(--primary);
+    min-width: 260px;
+    max-width: auto;
+    height: auto;
+    border-radius: 3px;
+    z-index: 2;
+    border: 1px solid var(--primary);
+    ul{
+        margin:0px;
+        padding:6px;
+        li{
+            list-style: none;
+            cursor: pointer;
+            display: inline;
+        }
+        li:hover{
+            color: var(--primaryLight);
+        }
+        span{
+            font-size: .8rem;
+            color: white;
+        }
+    }
 }

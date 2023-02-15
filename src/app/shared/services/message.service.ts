@@ -38,4 +38,8 @@ export class MessageService {
   public getUserName(user_id: number | null, user_id_send: number): Observable<any> {
     return this.http.get<number>(environment.GET_NAME + user_id + '/' + user_id_send);
   }
+
+  public newMsgName(user_id: number | null): Observable<any> {
+    return this.http.get<number>(environment.NEW_MSG_NAME + user_id);
+  }
 }
