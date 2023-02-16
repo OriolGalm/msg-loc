@@ -22,11 +22,12 @@ export class HomeComponent implements OnInit {
   public successShow: boolean = false;
   public hide: boolean = true;
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(
+    private readonly fb: FormBuilder,
     private readonly authSvc: AuthService,
     public readonly tokenSvc: TokenService,
     private readonly router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.initLoginForm();

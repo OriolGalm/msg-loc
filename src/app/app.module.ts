@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserComponent } from './components/user/user.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { ImageComponent } from './components/image/image.component';
 
 import { MessagesModule } from './components/messages/messages.module';
 
@@ -17,8 +16,7 @@ import { MessagesModule } from './components/messages/messages.module';
     AppComponent,
     HomeComponent,
     UserComponent,
-    HeaderComponent,
-    ImageComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

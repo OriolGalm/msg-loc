@@ -1,8 +1,7 @@
-<div class="container mt-4">
-    
+<div class="container">
     <div id="avatar_box"  data-toggle="tooltip" title="Add an image" data-animation="true">
         <input type="file" accept=".png, .jpg, .jpeg" class="file-input" name="img"  id="customFile"
-         (change)="handleImage($event)">
+        (change)="handleImage($event)">
         <label class="file-label" for="customFile">
             <img [src]="sendImg" id="avatar">
         </label>
@@ -21,9 +20,6 @@
         </div>
         <div class="row">
             <p class="col-1 message placeh" data-placeholder="Your description">{{ userData?.message }}</p>
-            <!-- <button class="col-1 btn btn-secondary btn-sm boto" (click)="changeForm()">
-                <i class="fa-solid fa-pen edit-icon"></i>
-            </button> -->
         </div>
     </div>
 
@@ -35,6 +31,9 @@
         <label for="msg" class="errorText" *ngIf="errorB == true">{{ errorText }}</label><br>
         <button class="btn btn-outline-primary me-2 mx-auto" type="submit">Edit</button>
     </form>
-    
-    
+
+    <div class="email">Your Email: 
+        <p>{{ userData?.email }}</p>
+    </div>
+
 </div>

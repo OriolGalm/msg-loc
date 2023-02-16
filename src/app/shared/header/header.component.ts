@@ -1,5 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { LocalstorageService } from '../services/localstorage.service';
 import { MessageService } from '../services/message.service';
 import { TokenService } from '../services/token.service';
@@ -14,22 +15,24 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('namesList') newList!: ElementRef;
 
-  userId!: number | null;
-  newMsgNames: any[] = [];
-  newNames: any[] = [];
-  flag: boolean = false;
+  private userId!: number | null;
+  newNames$!: Observable<any[]>;
+  private flag: boolean = false;
 
-  constructor(public readonly tokenSvc: TokenService,
+  constructor(
+    public readonly tokenSvc: TokenService,
     private readonly msgSvc: MessageService,
     private readonly userSvc: UserService,
     private readonly localStorageSvc: LocalstorageService,
     private readonly router: Router,
-    private readonly renderer: Renderer2) { }
+    private readonly renderer: Renderer2
+  ) { }
 
   ngOnInit(): void {
-    this.userId = this.tokenSvc.getId();
-    this.getNewMsgName();
-    console.log("Flag: ", this.flag);
+    if(this.tokenSvc.getId()){
+      this.userId = this.tokenSvc.getId();
+      this.getNewMsgName();
+    }
   }
 
   public logOut(): void{
@@ -38,13 +41,8 @@ export class HeaderComponent implements OnInit {
   }
 
   getNewMsgName() {
-    this.msgSvc.newMsgName(this.userId).subscribe(res => {
-      this.newMsgNames.push(res.data);
-      this.newMsgNames.map(x => { 
-        this.newNames = x;
-        console.log("NewNames: ", this.newNames)
-      })   
-    })
+    this.newNames$ = this.msgSvc.newMsgName(this.userId).pipe(
+      map(res => res.data)) 
   }
 
   showHideMsgNames() {
@@ -52,6 +50,10 @@ export class HeaderComponent implements OnInit {
     const namesDiv = this.newList.nativeElement;
     if(this.flag == true){
       this.renderer.setStyle(namesDiv, 'display', 'block');
+      setTimeout(() => {
+        this.renderer.setStyle(namesDiv, 'display', 'none');
+        this.flag = false;
+      }, 16000);
     }else{
       this.renderer.setStyle(namesDiv, 'display', 'none');
     }

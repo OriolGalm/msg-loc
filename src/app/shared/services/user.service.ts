@@ -41,7 +41,7 @@ export class UserService {
     return this.http.post<File>(environment.CLOUD_IMG, formData);
   }
 
-  public userByName(userId: number, userName: string | null): Observable<any> {
+  public userByName(userId: number | null, userName: string | null): Observable<any> {
     return this.http.get<User>(environment.GET_USER_BY_NAME + userId + '/' + userName);
   }
 }

@@ -4,8 +4,6 @@ import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
-import { isEmpty, map, Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-profiles',
@@ -19,16 +17,16 @@ export class ListProfilesComponent implements OnInit {
   dataUser:User[] = [];
   selectedUser!: User | null;
   private idBlockedUser: number[] = [];
-  idBlockedUsersUniques: number[] = [];
   hide = Array(this.dataUser.length).fill(false);
   userObj = Array(this.dataUser.length).fill(false);
-  arrayUser: any = [];
+  private arrayUser: any = [];
 
-  constructor(private readonly msgSvc: MessageService,
+  constructor(
+    private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
-    private readonly localStorageSvc: LocalstorageService,
-    private readonly router: Router) { }
+    private readonly localStorageSvc: LocalstorageService
+  ) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();

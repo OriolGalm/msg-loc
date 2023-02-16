@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { firstValueFrom, map, Observable, startWith, take } from 'rxjs';
-import { MessageService } from 'src/app/shared/message.service';
+import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import { MessageService } from 'src/app/shared/services/message.service';
 import { InfoUser } from 'src/app/shared/models/infoUser';
 import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
@@ -21,28 +21,26 @@ export class WriteMsgComponent implements OnInit {
   myControl = this.fb.control('', [Validators.required, Validators.minLength(2)]);
   msgForm!: FormGroup;
   filteredOptions!: Observable<string[]>;
-  userId!: any;
-  usersList: User[] = [];
-  usersNameList: any[] = [];
+  private userId!: any;
+  private usersList: User[] = [];
+  private usersNameList: string[] = [];
   userImage!: string;
-  userSelectedName!: string;
   selectedUser$ = this.localStorageSvc.selectedUser$;
-  userObj!: InfoUser;
+  private userObj!: InfoUser;
   private uniqueChars: string[] = [];
-  reloadUser!: any;
-  userName!: string;
-  storageImg!: string | undefined;
-  storageName!: string | undefined;
-  miniatura: string = environment.DEFAULT_IMG;
-  idReceive!: number;
-  initialReader: number = 0; 
+  private reloadUser!: User;
+  private userName!: string;
+  private idReceive!: number;
+  private initialReader: number = 0; 
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(
+    private readonly fb: FormBuilder,
     private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
     public readonly localStorageSvc: LocalstorageService,
-    private readonly router: Router) { }
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
@@ -66,7 +64,6 @@ export class WriteMsgComponent implements OnInit {
   }
 
   sendMsg(value: Message): void {
-    console.log("Readed: ", value);
     this.msgSvc.sendMesssage(this.userId, value).subscribe(res => {
       this.router.navigate(['msg/read']);
     })
@@ -103,14 +100,11 @@ export class WriteMsgComponent implements OnInit {
           this.userObj = res;
           if (this.userObj.image !== null) {
             this.userImage = `${environment.URL_IMG + this.userObj.image}`;
-            console.log("UserImage: ", this.userImage);
           } else {
             this.userImage = environment.DEFAULT_IMG;
           }
-          this.storageName = res.name
         }
       )
-      
       this.localStorageSvc.setUser(this.reloadUser);
     }
   }
@@ -128,7 +122,6 @@ export class WriteMsgComponent implements OnInit {
 
   submitSearch() {
     const resName = this.myControl.value;
-    console.log("ResName: ", resName);
     this.userSvc.userByName(this.userId, resName).subscribe(res => {
       if(res.data.id != this.userId){
         this.localStorageSvc.setUser(res.data);

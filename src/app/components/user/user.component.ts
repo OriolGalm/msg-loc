@@ -25,9 +25,11 @@ export class UserComponent implements OnInit {
   errorB: boolean = false;
   errorC: boolean = false;
 
-  constructor(public readonly tokenSvc: TokenService,
+  constructor(
+    public readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
-    private readonly fb: FormBuilder) { }
+    private readonly fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();

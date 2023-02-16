@@ -14,21 +14,20 @@ import { environment } from 'src/environments/environment';
 })
 export class ReadMsgComponent implements OnInit {
   selectedUser$ = this.localStorageSvc.selectedUser$;
-  userObj!: InfoUser;
+  private userObj!: InfoUser;
   userImage!: string;
   storageName!: string |undefined;
   storageMessage!: string |undefined;
-  idFromUser!: number;
+  private idFromUser!: number;
   userId!: number | null;
   message: Message[] = [];
- /*  userName!: any[];
-  usersObjName: number[] = []; */
 
   constructor(
     private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
     private readonly localStorageSvc: LocalstorageService,
-    private readonly router: Router) {  }
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
@@ -60,20 +59,6 @@ export class ReadMsgComponent implements OnInit {
       }
     )
   }
-
-  /* private getName(userId: number | null): void {
-    let currentUserId: any;
-    this.selectedUser$.subscribe(x => currentUserId = x.id)
-    this.message.map(res => {
-      this.usersObjName.push(res.id_send);
-      console.log("User: ", this.usersObjName);
-      this.msgSvc.getUserName(userId, currentUserId).subscribe(x => {
-        this.userName = x.data;
-        console.log("Name: ", this.userName this.selectedUser$.subscribe(x => console.log(x.name)) );
-      })
-      
-    })
-  } */
 
   toWrite(): void {
     this.router.navigate(['msg/write'])
