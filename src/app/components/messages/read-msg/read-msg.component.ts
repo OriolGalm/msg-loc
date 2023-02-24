@@ -52,7 +52,7 @@ export class ReadMsgComponent implements OnInit {
     this.localStorageSvc.setUser(reloadUser);
   }
 
-  private messageUsers(id: number | null, idRequest: number): void{
+  private messageUsers(id: number | null, idRequest: number){
     this.msgSvc.getMessage(id, idRequest).subscribe(
       res => {
         this.message = res.data;

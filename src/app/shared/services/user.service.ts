@@ -20,7 +20,7 @@ export class UserService {
   }
 
   public oneUserInfo(userId: number | null, userNameId: number): Observable<any> {
-    return this.http.get<any>(environment.USER_NAME + userId + '/' + userNameId);
+    return this.http.get<User>(environment.USER_NAME + userId + '/' + userNameId);
   }
 
   public allUsers(): Observable<any> {

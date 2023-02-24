@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'src/app/shared/services/message.service';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { environment } from 'src/environments/environment';
@@ -28,19 +29,29 @@ export class UserComponent implements OnInit {
   constructor(
     public readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly msgSvc: MessageService
   ) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
     this.showUser(this.userId);
     this.initForm();
+    this.getNewMsgName();
   }
 
   private initForm(): void {
     this.updateForm = this.fb.group({
       name: (''),
       message: ('')
+    })
+  }
+
+  //Busco els nous missatges i faig el setter 
+  private getNewMsgName() {
+    this.msgSvc.newMsgName(this.userId).subscribe(res => {
+      this.msgSvc.setNotRead(res.data);
+      console.log("Users return: ", res.data)
     })
   }
 

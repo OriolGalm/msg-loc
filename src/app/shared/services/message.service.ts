@@ -1,15 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Message } from './../models/message';
+
+const msgNotRead = {
+  id: '',
+  name: '',
+  subject: '', 
+  text: ''
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+  private notRead$ = new BehaviorSubject<any>(msgNotRead);
   
   constructor(private readonly http: HttpClient) { }
+
+  get selectedNotRead$(): Observable<any> {
+    return this.notRead$.asObservable();
+  }
+
+  setNotRead(msg: any): void {
+    this.notRead$.next(msg);
+  }
 
   public sendMesssage(user_id: number | null, msg: Message): Observable<Message> {
     return this.http.post<Message>(environment.CREATE_MSG + user_id, msg);

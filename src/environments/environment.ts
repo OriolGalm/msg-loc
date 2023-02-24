@@ -4,25 +4,25 @@
 
 export const environment = {
   production: false,
-  LOGIN_URL: 'http://msg.messapp.site/api/login',
-  REGISTER_URL: 'http://msg.messapp.site/api/register',
-  UPDATE_USER: 'http://msg.messapp.site/api/update/',
-  SHOW_USER: 'http://msg.messapp.site/api/show/',
-  USER_NAME: 'http://msg.messapp.site/api/showname/',
-  ALL_USERS: 'http://msg.messapp.site/api/showall/',
-  CHANGE_IMG: 'http://msg.messapp.site/api/image/',
+  LOGIN_URL: 'http://localhost:8080/api/login',
+  REGISTER_URL: 'http://localhost:8080/api/register',
+  UPDATE_USER: 'http://localhost:8080/api/update/',
+  SHOW_USER: 'http://localhost:8080/api/show/',
+  USER_NAME: 'http://localhost:8080/api/showname/',
+  ALL_USERS: 'http://localhost:8080/api/showall/',
+  CHANGE_IMG: 'http://localhost:8080/api/image/',
   CLOUD_IMG: 'https://api.cloudinary.com/v1_1/dfwiywprm/image/upload/',
-  CREATE_MSG: 'http://msg.messapp.site/api/text/',
-  GET_ID: 'http://msg.messapp.site/api/getid/',
-  GET_MSG: 'http://msg.messapp.site/api/gettext/',
-  BLOCK_USER: 'http://msg.messapp.site/api/block/',
-  UNBLOCK_USER: 'http://msg.messapp.site/api/unblock/',
-  GET_BLOCKED: 'http://msg.messapp.site/api/getblocked/',
-  GET_NAME: 'http://msg.messapp.site/api/getname/',
+  CREATE_MSG: 'http://localhost:8080/api/text/',
+  GET_ID: 'http://localhost:8080/api/getid/',
+  GET_MSG: 'http://localhost:8080/api/gettext/',
+  BLOCK_USER: 'http://localhost:8080/api/block/',
+  UNBLOCK_USER: 'http://localhost:8080/api/unblock/',
+  GET_BLOCKED: 'http://localhost:8080/api/getblocked/',
+  GET_NAME: 'http://localhost:8080/api/getname/',
   URL_IMG: `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/`,
   DEFAULT_IMG: 'assets/img/clouds.jpg',
-  GET_USER_BY_NAME: 'http://msg.messapp.site/api/userbyname/',
-  NEW_MSG_NAME: 'http://msg.messapp.site/api/getnotread/'
+  GET_USER_BY_NAME: 'http://localhost:8080/api/userbyname/',
+  NEW_MSG_NAME: 'http://localhost:8080/api/getnotread/'
 };
 
 /*

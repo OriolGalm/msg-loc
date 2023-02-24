@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
             this.tokenSvc.setToken(data.data.token);
             this.router.navigate(['user']);
             this.errorShow = false;
+            this.authSvc.getNewMsgName();
         }}
       })
     }else{

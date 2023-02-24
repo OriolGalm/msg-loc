@@ -23,6 +23,9 @@ export class LocalstorageService {
   }
 
   setUser(user: User): void {
+    if (!user) {
+      return;
+    }
     const {created_at, email, password, updated_at, ...infoUserObj} = user;
     this.msgUser$.next({...infoUserObj, id: String(infoUserObj.id)});
     localStorage.setItem("userData", JSON.stringify(infoUserObj));
