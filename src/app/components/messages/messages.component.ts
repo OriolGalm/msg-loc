@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-messages',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly sharedSvc: SharedService) { }
 
   ngOnInit(): void {
+  }
+
+  openList(): void {
+    this.sharedSvc.emitButtonClick();
   }
 
 }

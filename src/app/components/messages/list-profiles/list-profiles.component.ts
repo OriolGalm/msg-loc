@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MessageService } from 'src/app/shared/services/message.service';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-list-profiles',
@@ -11,6 +12,8 @@ import { LocalstorageService } from 'src/app/shared/services/localstorage.servic
   styleUrls: ['./list-profiles.component.scss']
 })
 export class ListProfilesComponent implements OnInit {
+  @ViewChild('list') listUsers!: ElementRef;
+
   private userId!: any;
   private resIds: number[] = [];
   private resIdsUniques: number[] = [];
@@ -25,12 +28,18 @@ export class ListProfilesComponent implements OnInit {
     private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
     private readonly userSvc: UserService,
-    private readonly localStorageSvc: LocalstorageService
+    private readonly localStorageSvc: LocalstorageService,
+    private readonly sharedSvc: SharedService,
+    private readonly renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
     this.userId = this.tokenSvc.getId();
     this.getIds(this.userId);
+    this.sharedSvc.buttonClicked.subscribe(() => {
+      if(window.innerWidth <= 500)
+        this.renderer.setStyle(this.listUsers.nativeElement, 'left', '0px')
+    })
   }
 
   public msgFromUser(id: number): void {
@@ -39,6 +48,8 @@ export class ListProfilesComponent implements OnInit {
       }else{
         this.msgFromValidUser(id);
         this.selectedUserMsg(id);
+        if(window.innerWidth <= 500)
+          this.renderer.setStyle(this.listUsers.nativeElement, 'left', '-600px')
       }
   }
 

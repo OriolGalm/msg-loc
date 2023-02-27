@@ -29,8 +29,7 @@
         float:left;
     }
     #msgAvatar{
-        margin-right: 10px;
-        height: auto;
+        margin-right: 0px;
     }
 }
 .newMsg{
@@ -75,4 +74,18 @@
     color: var(--secondaryWhite);
     width: 80%;
     margin-left: 20%;
+}
+@media(max-width: 1000px){
+    #msgAvatar{
+        height: 3rem;
+        overflow: hidden;
+    }
+}
+@media(max-width: 500px){
+    .read{
+        position: absolute;
+        top: 124px;
+        left: 0px;
+        width: 100%;
+    }
 }

@@ -1,20 +1,17 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  //private loginStart = new BehaviorSubject<any>();
-
   constructor() { }
 
-  /* get initialLogin(): Observable<any> {
-    return this.loginStart.asObservable();
-  } */
+  buttonClicked = new EventEmitter();
 
-  setLogin() {
-    //this.loginStart.next();
+  emitButtonClick() {
+    this.buttonClicked.emit();
   }
+
+  
 }

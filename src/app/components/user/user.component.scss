@@ -30,6 +30,9 @@ h4{
     content: attr(data-placeholder);
     color:silver;
 }
+.style{
+    width:25%;
+}
 .boto{
     width: 24px;
     height: 24px;
@@ -38,6 +41,13 @@ h4{
 }
 .boto:hover{
     color: rgb(255, 71, 169)
+}
+.botoForm{
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+.botoForm:hover{
+    color: white
 }
 .error_message{
     position: fixed;
@@ -68,12 +78,22 @@ h4{
 }
 .email{
     position: absolute;
-    top: 120px;
-    left: 40%;
+    top: 90px;
+    right:4%;
     font-size: 1.4rem;
     font-weight: 400;
     p{
         font-size: 1rem;
         font-weight: 400;
+    }
+}
+@media(max-width:500px){
+    .email{
+        left:52%;
+        max-width:200px;
+    }
+    .style{
+        width:80%;
+        margin:0px;
     }
 }

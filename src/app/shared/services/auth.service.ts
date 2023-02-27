@@ -29,8 +29,10 @@ export class AuthService {
 
   getNewMsgName() {
     const userId = this.tokenSvc.getId();
-    this.msgSvc.newMsgName(userId).subscribe(res => {
-      this.newNames = res.data;
-    }) 
+    if(userId){
+      this.msgSvc.newMsgName(userId).subscribe(res => {
+        this.newNames = res.data;
+      }) 
+    }
   }
 }

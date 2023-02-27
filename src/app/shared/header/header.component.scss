@@ -35,7 +35,7 @@
     display:none;
     background-color: var(--secondary);
     color: var(--primary);
-    min-width: 260px;
+    width: 260px;
     max-width: auto;
     height: auto;
     border-radius: 3px;
@@ -56,5 +56,36 @@
             font-size: .8rem;
             color: white;
         }
+    }
+}
+.menu{
+    background-color: var(--secondary);
+    padding-left: 10px;
+    .menuChild{
+        border-bottom: 1px solid var(--primary);
+        margin-bottom: 20px;
+        margin-right: 10px;
+    }
+    h5{
+        color:white;
+    }
+}
+.menuButton{
+    color:var(--primary);
+}
+@media(max-width: 500px){
+    .menu{
+        max-width: 310px;
+    }
+    .newNames{
+        top:140px;
+        left: 135px;
+        width:160px !important;
+        #point{
+            float:right;
+        }
+    }
+    .msg{
+        width:114px;
     }
 }

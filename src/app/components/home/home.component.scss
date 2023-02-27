@@ -46,6 +46,7 @@
         padding: 5px;
         margin: 0px auto 10px;
         cursor: pointer;
+        color: var(--blood);
     }
     h4:hover{
         text-decoration: underline;
@@ -56,6 +57,8 @@
         margin: 0px auto 10px;
         span{
             cursor: pointer;
+            color:var(--blood);
+            font-weight: 500;
         }
         span:hover{
             text-decoration: underline;
@@ -64,4 +67,11 @@
 }
 .modal-header .btn-close{
     margin: 0px;
+}
+.botoEnter{
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+.botoEnter:hover{
+    color:white;
 }

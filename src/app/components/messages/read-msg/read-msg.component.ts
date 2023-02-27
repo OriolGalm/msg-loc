@@ -46,7 +46,8 @@ export class ReadMsgComponent implements OnInit {
         this.storageName = this.userObj.name;
         this.storageMessage = this.userObj.message;
         this.idFromUser = parseInt(this.userObj.id);
-        this.messageUsers(this.userId, this.idFromUser);
+        if(this.idFromUser)
+          this.messageUsers(this.userId, this.idFromUser);
       }
     )
     this.localStorageSvc.setUser(reloadUser);

@@ -22,7 +22,8 @@ export const environment = {
   URL_IMG: `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/`,
   DEFAULT_IMG: 'assets/img/clouds.jpg',
   GET_USER_BY_NAME: 'http://localhost:8080/api/userbyname/',
-  NEW_MSG_NAME: 'http://localhost:8080/api/getnotread/'
+  NEW_MSG_NAME: 'http://localhost:8080/api/getnotread/',
+  SET_READED: 'http://localhost:8080/api/setreaded/'
 };
 
 /*

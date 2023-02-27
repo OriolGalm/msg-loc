@@ -24,12 +24,12 @@
     </div>
 
     <form *ngIf="hideForm == false" (ngSubmit)="onUpdate(userData)">
-        <input type="text" class="form-control w-25 my-2 inputName" [(ngModel)]="userData.name" name="name"
+        <input type="text" class="form-control my-2 inputName style" [(ngModel)]="userData.name" name="name"
             id="name" minlength="3" required>
         <label for="name" class="errorText" *ngIf="errorC == true">{{ errorName }}</label>
-        <input type="text" class="form-control w-25" [(ngModel)]="userData.message" name="message" id="msg">
+        <input type="text" class="form-control style" [(ngModel)]="userData.message" name="message" id="msg">
         <label for="msg" class="errorText" *ngIf="errorB == true">{{ errorText }}</label><br>
-        <button class="btn btn-outline-primary me-2 mx-auto" type="submit">Edit</button>
+        <button class="btn me-2 mx-auto botoForm" type="submit">Edit</button>
     </form>
 
     <div class="email">Your Email: 

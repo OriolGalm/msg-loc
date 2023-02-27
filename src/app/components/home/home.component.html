@@ -3,13 +3,13 @@
     <p>Here you can send messages to other people and interact with them</p>
 
     <!-- Button trigger modal login-->
-    <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#LoginModal"
+    <button type="button" class="btn me-3 botoEnter" data-bs-toggle="modal" data-bs-target="#LoginModal"
     *ngIf="!this.tokenSvc.isLogged()">
         Login
     </button>
 
     <!-- Button trigger modal register-->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+    <button type="button" class="btn botoEnter" data-bs-toggle="modal" data-bs-target="#RegisterModal"
     *ngIf="!this.tokenSvc.isLogged()">
         Register
     </button>
@@ -58,7 +58,7 @@
                 <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
                   class="error">Required</div>
             </div>
-            <button class="btn btn-primary w-75 ms-5 mt-3" type="submit">Login</button>
+            <button class="btn w-75 ms-5 mt-3 botoEnter" type="submit">Login</button>
           </form>
         </div>
         <h4 data-bs-toggle="modal" data-bs-target="#RegisterModal">Create an account</h4>
@@ -104,7 +104,7 @@
                 <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.errors?.['required']"
                   class="error">Required</div>
             </div>
-            <button class="btn btn-primary w-75 ms-5 mt-3" type="submit">Register</button>
+            <button class="btn w-75 ms-5 mt-3 botoEnter" type="submit">Register</button>
           </form>
         </div>
         <div class="go-to-login">Already have an account?&nbsp;<span data-bs-toggle="modal" data-bs-target="#LoginModal">Login</span></div>

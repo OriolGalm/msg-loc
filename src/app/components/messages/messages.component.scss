@@ -1,0 +1,11 @@
+.botoList{
+    display:none;
+}
+@media(max-width: 500px){
+    .botoList{
+        display:block;
+        margin: 25px 0px 10px 65%;
+        background-color: var(--secondary);
+        color: white;
+    }
+}
