@@ -14,7 +14,7 @@
           <a class="nav-link active me-3" aria-current="page" routerLink="/user">User</a>
           <a class="nav-link active me-3 msg" aria-current="page" id="offcanvasNavbar">
 
-            <span *ngIf="authSvc.newNames?.length != 1" (click)="showHideMsgNames()">
+            <span *ngIf="authSvc.newNames?.length != 0" (click)="showHideMsgNames()">
               New Messages 
               <div id="point"></div>
               <div class="newNames" #namesList *ngIf="authSvc.newNames">
@@ -25,10 +25,10 @@
               </div>
             </span>
 
-            <div *ngIf="authSvc.newNames?.length == 1"><a routerLink="msg/write">Message</a></div>
+            <div *ngIf="authSvc.newNames?.length == 0"><a routerLink="msg/write">Message</a></div>
           </a>
           <a class="nav-link active logout" id="logout" aria-current="page" *ngIf="this.tokenSvc.isLogged()"
-            (click)="logOut()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">Logout</a>
+            (click)="logOut()">Logout</a>
           
         </div>
       </div>

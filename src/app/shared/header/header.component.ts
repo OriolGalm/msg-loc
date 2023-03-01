@@ -45,10 +45,6 @@ export class HeaderComponent implements OnInit {
     const namesDiv = this.newList.nativeElement;
     if(this.flag == true){
       this.renderer.setStyle(namesDiv, 'display', 'block');
-      /* setTimeout(() => {
-        this.renderer.setStyle(namesDiv, 'display', 'none');
-        this.flag = false;
-      }, 16000); */
     }else{
       this.renderer.setStyle(namesDiv, 'display', 'none');
     }
@@ -58,7 +54,6 @@ export class HeaderComponent implements OnInit {
     this.userId = this.tokenSvc.getId();
     this.userSvc.oneUserInfo(this.userId, idFromUser).subscribe(res => {
       this.localStorageSvc.setUser(res.data);
-      this.showHideMsgNames();
     });
     this.msgSvc.msgReaded(this.userId, id_msg).subscribe(res => res = res)
   }

@@ -3,7 +3,7 @@
       
       <tbody class="nameBody">
         <tr class="newMsg">
-          <p routerLink="msg/write">Write new Message</p>
+          <p (click)="newMsgRedirect()">Write new Message</p>
         </tr>
         <tr *ngFor="let data of dataUser index as i;" class="nameRow">
           <!-- <th scope="row">{{ i + 1 }}</th> -->

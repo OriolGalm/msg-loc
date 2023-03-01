@@ -23,8 +23,8 @@ export class UserService {
     return this.http.get<User>(environment.USER_NAME + userId + '/' + userNameId);
   }
 
-  public allUsers(): Observable<any> {
-    return this.http.get<User>(environment.ALL_USERS);
+  public allUsers(userId: number | null): Observable<any> {
+    return this.http.get<User>(environment.ALL_USERS + userId);
   }
 
   public updateImage(userId: number, img: File): Observable<File> {

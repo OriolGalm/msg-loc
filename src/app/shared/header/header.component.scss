@@ -75,12 +75,27 @@
 }
 @media(max-width: 500px){
     .menu{
-        max-width: 310px;
+        width: 310px !important;
     }
     .newNames{
         top:140px;
         left: 135px;
         width:160px !important;
+        #point{
+            float:right;
+        }
+    }
+    .msg{
+        width:114px;
+    }
+}
+@media(max-width: 1000px){
+    .menu{
+        width: 410px;
+    }
+    .newNames{
+        top:140px;
+        left: 135px;
         #point{
             float:right;
         }

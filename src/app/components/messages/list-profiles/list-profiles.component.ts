@@ -5,6 +5,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-profiles',
@@ -30,7 +31,8 @@ export class ListProfilesComponent implements OnInit {
     private readonly userSvc: UserService,
     private readonly localStorageSvc: LocalstorageService,
     private readonly sharedSvc: SharedService,
-    private readonly renderer: Renderer2
+    private readonly renderer: Renderer2,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -138,5 +140,12 @@ export class ListProfilesComponent implements OnInit {
       );
     }
   }
+
+  newMsgRedirect(): void {
+    this.router.navigate(['msg/write']);
+    if(window.innerWidth <= 500)
+      this.renderer.setStyle(this.listUsers.nativeElement, 'left', '-600px')
+  }
+
 
 }

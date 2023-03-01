@@ -79,7 +79,7 @@ export class WriteMsgComponent implements OnInit {
   private getUsersName(value: string): string[] {
     const filterValue = value.toLowerCase();
     if (this.myControl.valid) {
-      this.userSvc.allUsers().subscribe(res => {
+      this.userSvc.allUsers(this.userId).subscribe(res => {
         this.usersList =  res.data;
         this.usersList.map((x: User) => {
           if(x.name){
