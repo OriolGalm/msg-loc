@@ -44,13 +44,13 @@
     border-radius: 4px;
     text-align: center;
     color: var(--primaryLima);
-    background-color: var(--maroon);
+    background-color: rgba(40,40,40,1);
     cursor: pointer;
     transition: all .3s ease-in-out;
 }
 .newMsg:hover{
     background-color: black;
-    outline: 1px solid var(--third);
+    outline: 2px solid var(--third);
     color: var(--third);
 }
 

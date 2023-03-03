@@ -1,38 +1,40 @@
 <nav class="navbar navbar-expand-lg supbar">
-    <div class="container-fluid">
-      <a class="navbar-brand"routerLink="/">Hello message</a>
-      <button class="navbar-toggler menuButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="offcanvas offcanvas-end menu" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header menuChild">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu of Messages</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="navbar-nav" *ngIf="this.tokenSvc.isLogged()">
-          <a class="nav-link active me-3" aria-current="page" routerLink="/user">User</a>
-          <a class="nav-link active me-3 msg" aria-current="page" id="offcanvasNavbar">
+  <div class="container-fluid">
+    <a class="navbar-brand"routerLink="/">Hello message</a>
+    <button class="navbar-toggler menuButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="offcanvas offcanvas-end menu" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header menuChild">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu of Messages</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="navbar-nav" *ngIf="this.tokenSvc.isLogged()">
+        <a class="nav-link active me-3" aria-current="page" routerLink="/user" data-bs-toggle="offcanvas"  
+          data-bs-target="#offcanvasNavbar">User</a>
+        <a class="nav-link active me-3 msg" aria-current="page" id="offcanvasNavbar">
 
-            <span *ngIf="authSvc.newNames?.length != 0" (click)="showHideMsgNames()">
-              New Messages 
-              <div id="point"></div>
-              <div class="newNames" #namesList *ngIf="authSvc.newNames">
-                <ul *ngFor="let names of authSvc.newNames">
-                  <li routerLink="msg/read" (click)="getMsgUser(names.id, names.id_msg)">{{ names.name }}:</li>
-                  <span> {{ names.subject }}</span>
-                </ul>
-              </div>
-            </span>
+          <span *ngIf="authSvc.newNames?.length != 0" (click)="showHideMsgNames()" data-bs-toggle="offcanvas"  
+          data-bs-target="#offcanvasNavbar">
+            New Messages 
+            <div id="point"></div>
+            <div class="newNames" #namesList *ngIf="authSvc.newNames">
+              <ul *ngFor="let names of authSvc.newNames">
+                <li routerLink="msg/read" (click)="getMsgUser(names.id, names.id_msg)">{{ names.name }}:</li>
+                <span> {{ names.subject }}</span>
+              </ul>
+            </div>
+          </span>
 
-            <div *ngIf="authSvc.newNames?.length == 0"><a routerLink="msg/write">Message</a></div>
-          </a>
-          <a class="nav-link active logout" id="logout" aria-current="page" *ngIf="this.tokenSvc.isLogged()"
-            (click)="logOut()">Logout</a>
-          
-        </div>
+          <div *ngIf="authSvc.newNames?.length == 0"><a routerLink="msg/write" data-bs-toggle="offcanvas"  
+          data-bs-target="#offcanvasNavbar">Message</a></div>
+        </a>
+        <a class="nav-link active logout" id="logout" aria-current="page" *ngIf="this.tokenSvc.isLogged()"
+          (click)="logOut()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">Logout</a>
       </div>
     </div>
+  </div>
 </nav>
 
 

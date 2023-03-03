@@ -67,6 +67,9 @@ export class HomeComponent implements OnInit {
             this.router.navigate(['user']);
             this.errorShow = false;
             this.authSvc.getNewMsgName();
+            setTimeout(() => {
+              this.tokenSvc.logOut();
+            }, 14400000);
         }}
       })
     }else{
