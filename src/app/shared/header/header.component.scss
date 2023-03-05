@@ -1,5 +1,11 @@
 .supbar{
     background-color: var(--secondary);
+    img{
+        width:40px;
+        height: 30px;
+        margin-right: 10px;
+        cursor: auto;
+    }
     a{
         color: white;
         span{

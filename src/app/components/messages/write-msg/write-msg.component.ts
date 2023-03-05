@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
 })
 export class WriteMsgComponent implements OnInit {
 
-  myControl = this.fb.control('', [Validators.required, Validators.minLength(2)]);
+  myControl = this.fb.control('', [Validators.required, Validators.minLength(1)]);
   msgForm!: FormGroup;
   filteredOptions!: Observable<string[]>;
   private userId!: any;
