@@ -16,7 +16,7 @@ export const environment = {
   GET_BLOCKED: 'https://msg.messapp.site/api/getblocked/',
   GET_NAME: 'https://msg.messapp.site/api/getname/',
   URL_IMG: `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/`,
-  DEFAULT_IMG: 'assets/img/clouds.jpg',
+  DEFAULT_IMG: 'assets/img/profile3.png',
   GET_USER_BY_NAME: 'https://msg.messapp.site/api/userbyname/',
   NEW_MSG_NAME: 'https://msg.messapp.site/api/getnotread/',
   SET_READED: 'https://msg.messapp.site/api/setreaded/'

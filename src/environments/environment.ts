@@ -20,7 +20,7 @@ export const environment = {
   GET_BLOCKED: 'http://localhost:8080/api/getblocked/',
   GET_NAME: 'http://localhost:8080/api/getname/',
   URL_IMG: `https://res.cloudinary.com/dfwiywprm/image/upload/v1673365846/message_api/`,
-  DEFAULT_IMG: 'assets/img/profile1.png',
+  DEFAULT_IMG: 'assets/img/profile3.png',
   GET_USER_BY_NAME: 'http://localhost:8080/api/userbyname/',
   NEW_MSG_NAME: 'http://localhost:8080/api/getnotread/',
   SET_READED: 'http://localhost:8080/api/setreaded/'

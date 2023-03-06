@@ -130,4 +130,8 @@ export class WriteMsgComponent implements OnInit {
     })
   }
 
+  toRead(): void {
+    this.router.navigate(['msg/read'])
+  }
+
 }

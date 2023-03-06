@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   private userId!: any;
   public image!: File;
   public sendImg!: string;
-  public miniatura: any = "./../../assets/img/profile.png";
+  public miniatura: any;
   public errorShow: boolean = false;
   public errorImg: string = "This image cannot be larger than 1Mb";
   errorText: string = "This text is too large";
@@ -81,7 +81,7 @@ export class UserComponent implements OnInit {
         if(this.userData.image != null){
           this.sendImg = environment.URL_IMG + this.userData.image
         }else{
-          this.sendImg = this.miniatura;
+          this.sendImg = environment.DEFAULT_IMG;
         }
     });
   }

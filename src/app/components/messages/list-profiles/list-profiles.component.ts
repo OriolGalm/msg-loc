@@ -73,6 +73,7 @@ export class ListProfilesComponent implements OnInit {
         let allUserObj = user;
         //const {created_at, email, password, updated_at, ...infoUserObj} = allUserObj;
         this.localStorageSvc.setUser(allUserObj);
+        this.router.navigate(['msg/read']);
     //cridar la funció de back que canvia el 'zero' a 'u' en la columna readed de la taula messages
 
       }

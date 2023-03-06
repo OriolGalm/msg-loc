@@ -87,8 +87,12 @@
         top: 124px;
         left: 0px;
         width: 100%;
+        div{
+            left:3%;
+        }
     }
     .name{
         font-size: 1.4rem !important;
+        margin-left: 70px !important;
     }
 }

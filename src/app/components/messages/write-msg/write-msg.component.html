@@ -13,7 +13,7 @@
     </form>
     <!-- <app-search class="col"></app-search> -->
 
-    <div class="col-7" id="userToMsg">
+    <div (click)="toRead()" class="col-7" id="userToMsg">
       <div *ngIf="userImage">
         <div class="col avatarBox">
             <img [src]="userImage" id="avatarImg">

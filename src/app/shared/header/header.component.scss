@@ -6,6 +6,13 @@
         margin-right: 10px;
         cursor: auto;
     }
+    @media(max-width:500px){
+        img{
+            width: 30px;
+            height:26px;
+            padding-bottom: 4px;
+        }
+    }
     a{
         color: white;
         span{
