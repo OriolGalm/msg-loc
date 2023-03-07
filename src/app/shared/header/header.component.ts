@@ -55,7 +55,12 @@ export class HeaderComponent implements OnInit {
     this.userSvc.oneUserInfo(this.userId, idFromUser).subscribe(res => {
       this.localStorageSvc.setUser(res.data);
     });
-    this.msgSvc.msgReaded(this.userId, id_msg).subscribe(res => res = res)
+    this.msgSvc.msgReaded(this.userId, id_msg).subscribe(res => res = res);
+    this.enterMsg();
+  }
+
+  enterMsg(): void {
+    this.router.navigate(['msg/write'])
   }
 
 }

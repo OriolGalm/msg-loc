@@ -11,6 +11,10 @@ export class MessagesComponent implements OnInit {
   constructor(private readonly sharedSvc: SharedService) { }
 
   ngOnInit(): void {
+    if (!localStorage.getItem('hasReloaded')) {
+      localStorage.setItem('hasReloaded', 'true');
+      window.location.reload();
+    }
   }
 
   openList(): void {

@@ -21,13 +21,13 @@
             <div id="point"></div>
             <div class="newNames" #namesList *ngIf="authSvc.newNames">
               <ul *ngFor="let names of authSvc.newNames">
-                <li routerLink="msg/read" (click)="getMsgUser(names.id, names.id_msg)">{{ names.name }}:</li>
+                <li (click)="getMsgUser(names.id, names.id_msg)">{{ names.name }}:</li>
                 <span> {{ names.subject }}</span>
               </ul>
             </div>
           </span>
 
-          <div *ngIf="authSvc.newNames?.length == 0"><a routerLink="msg/write" data-bs-toggle="offcanvas"  
+          <div *ngIf="authSvc.newNames?.length == 0"><a (click)="enterMsg()" data-bs-toggle="offcanvas"  
           data-bs-target="#offcanvasNavbar">Message</a></div>
         </a>
         <a class="nav-link active logout" id="logout" aria-current="page" *ngIf="this.tokenSvc.isLogged()"
