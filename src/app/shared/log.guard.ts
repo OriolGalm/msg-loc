@@ -20,6 +20,7 @@ export class LogGuard implements CanActivate {
         this.router.navigate(['/']);
         return false;
       }
+      this.tokenSvc.expiratedToken();
     return true;
   }
   

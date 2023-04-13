@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LocalstorageService } from '../services/localstorage.service';
 import { MessageService } from '../services/message.service';
+import { SharedService } from '../services/shared.service';
 import { TokenService } from '../services/token.service';
 import { UserService } from '../services/user.service';
 
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit {
     public authSvc: AuthService,
     private readonly msgSvc: MessageService,
     private readonly router: Router,
-    private readonly renderer: Renderer2
+    private readonly renderer: Renderer2,
+    public sharedSvc: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -50,13 +52,20 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  getMsgUser(idFromUser: number, id_msg: number): void {
+  getMsgInfo(): void {
+    
+  }
+
+  goMsgUser(idFromUser: number, id_msg: number): void {
     this.userId = this.tokenSvc.getId();
+    console.log("entra: ")
     this.userSvc.oneUserInfo(this.userId, idFromUser).subscribe(res => {
+      console.log("User: ", res.data);
+      //this.sharedSvc.newMsg = res.data;
       this.localStorageSvc.setUser(res.data);
     });
     this.msgSvc.msgReaded(this.userId, id_msg).subscribe(res => res = res);
-    this.enterMsg();
+    this.router.navigate(['msg/read'])
   }
 
   enterMsg(): void {

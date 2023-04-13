@@ -37,7 +37,6 @@ export class UserComponent implements OnInit {
     this.userId = this.tokenSvc.getId();
     this.showUser(this.userId);
     this.initForm();
-    //this.getNewMsgName();
   }
 
   private initForm(): void {
@@ -47,16 +46,7 @@ export class UserComponent implements OnInit {
     })
   }
 
-  //Busco els nous missatges i faig el setter 
-  /* private getNewMsgName() {
-    this.msgSvc.newMsgName(this.userId).subscribe(res => {
-      this.msgSvc.setNotRead(res.data);
-      console.log("Users return: ", res.data)
-    })
-  } */
-
   public async onUpdate(value: any){
-    //const token: any = this.tokenSvc.getToken();
     if(value.message.length > 100 || value.name.length > 40){
       this.errorB = true;
     }else if(value.name.length < 3){

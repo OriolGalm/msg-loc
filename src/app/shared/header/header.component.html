@@ -21,7 +21,7 @@
             <div id="point"></div>
             <div class="newNames" #namesList *ngIf="authSvc.newNames">
               <ul *ngFor="let names of authSvc.newNames">
-                <li (click)="getMsgUser(names.id, names.id_msg)">{{ names.name }}:</li>
+                <li (click)="goMsgUser(names.id, names.id_msg)">{{ names.name }}:</li>
                 <span> {{ names.subject }}</span>
               </ul>
             </div>

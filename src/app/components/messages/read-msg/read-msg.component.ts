@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InfoUser } from 'src/app/shared/models/infoUser';
 import { Message } from 'src/app/shared/models/message';
 import { LocalstorageService } from 'src/app/shared/services/localstorage.service';
@@ -21,15 +21,19 @@ export class ReadMsgComponent implements OnInit {
   private idFromUser!: number;
   userId!: number | null;
   message: Message[] = [];
+  msgResolver!: Message;
 
   constructor(
     private readonly msgSvc: MessageService,
     private readonly tokenSvc: TokenService,
     private readonly localStorageSvc: LocalstorageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    //this.msgResolver = this.route.snapshot.data['userMsg'];
+    //console.log("Resolver: ", this.route.snapshot.data['userMsg']);
     this.userId = this.tokenSvc.getId();
     this.userInfo();
   }

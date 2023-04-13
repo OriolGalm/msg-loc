@@ -14,7 +14,7 @@
         <article class="articleMsg" *ngFor="let msg of message" 
         [ngClass]="{'msgLoggedUser': msg.id_send === userId, 'msgOtherUser': msg.id_send !== userId}">
             <h5 class="title">{{ msg.subject }}</h5>
-            <p>{{ msg.text }}</p>
+            <p id="text">{{ msg.text }}</p>
             <p>{{ msg.created_at }}</p>
             
         </article>

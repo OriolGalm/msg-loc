@@ -48,6 +48,27 @@ export class TokenService {
     return email; 
   }
 
+  public expTime(): any | null{
+    if(!this.isLogged()){
+      return null;
+    }
+    const exp: any = this.getPayload().exp;
+    return exp; 
+  }
+
+  public expiratedToken(): any | null {
+    if(!this.isLogged()){
+      return null;
+    }
+    const currentTime = Math.floor(Date.now() / 1000);
+    if(this.expTime() < currentTime){
+      this.logOut();
+      return false
+    }else{
+      return true
+    }
+  }
+
   private getPayload(){
     const token = this.getToken();
     const encodedData = token.split('.')[1];
